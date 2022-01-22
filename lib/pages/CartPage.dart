@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class CartPage extends StatelessWidget {
+  static final String BASE_URL = "http://10.0.2.2:8080/d2d/image/";
+
   Widget generateCart(BuildContext context, Item d) {
     return Padding(
       padding: EdgeInsets.all(5.0),
@@ -29,7 +31,8 @@ class CartPage extends StatelessWidget {
                       topRight: Radius.circular(10.0),
                       bottomRight: Radius.circular(10.0)),
                   image: DecorationImage(
-                      image: NetworkImage(d.imageName), fit: BoxFit.fitHeight)),
+                      image: NetworkImage(BASE_URL + d.imageName),
+                      fit: BoxFit.fitHeight)),
             ),
             Expanded(
                 child: Padding(
@@ -50,8 +53,7 @@ class CartPage extends StatelessWidget {
                         alignment: Alignment.bottomRight,
                         child: InkResponse(
                           onTap: () {
-                            Get.find<HomePageController>()
-                                .removeFromCart(d.id);
+                            Get.find<HomePageController>().removeFromCart(d.id);
                             ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                                 content: Text(
                                     "Item removed from cart successfully")));
@@ -81,10 +83,9 @@ class CartPage extends StatelessWidget {
     );
   }
 
-
   getItemTotal(List<Item> items) {
     double sum = 0.0;
-   // items.forEach((e){sum += e.price;});
+    // items.forEach((e){sum += e.price;});
     return "\$$sum";
   }
 
@@ -127,37 +128,36 @@ class CartPage extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Container(
-                child: GetBuilder<HomePageController>(
-                  builder: (_) {
-                    return RichText(
-                      text: TextSpan(
-                          text: "Total  ",
-                          style: TextStyle(color: Colors.black, fontSize: 18),
-                          children: <TextSpan>[
-                            TextSpan(
-                                text: getItemTotal(controller.cartItems).toString(),
-                                style: TextStyle(fontWeight: FontWeight.bold)
-                            )
-                          ]
-                      ),
-                    );
-                  },
-                )
-              ),
+              Container(child: GetBuilder<HomePageController>(
+                builder: (_) {
+                  return RichText(
+                    text: TextSpan(
+                        text: "Total  ",
+                        style: TextStyle(color: Colors.black, fontSize: 18),
+                        children: <TextSpan>[
+                          TextSpan(
+                              text:
+                                  getItemTotal(controller.cartItems).toString(),
+                              style: TextStyle(fontWeight: FontWeight.bold))
+                        ]),
+                  );
+                },
+              )),
               Container(
                 alignment: Alignment.centerLeft,
                 height: 50,
                 color: Colors.white,
                 child: ElevatedButton(
-                  onPressed: () {},
-                  child: Container(
-                    alignment: Alignment.center,
-                    height: 40,
-                    width: 100,
-                    child: Text("Checkout", style: TextStyle(fontSize: 18),),
-                  )
-                ),
+                    onPressed: () {},
+                    child: Container(
+                      alignment: Alignment.center,
+                      height: 40,
+                      width: 100,
+                      child: Text(
+                        "Checkout",
+                        style: TextStyle(fontSize: 18),
+                      ),
+                    )),
               )
             ],
           ),

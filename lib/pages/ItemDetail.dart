@@ -19,6 +19,8 @@ class _ItemDetailPageState extends State<ItemDetailPage> {
   int active = 0;
   String image =
       "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRc_R7jxbs8Mk2wjW9bG6H9JDbyEU_hRHmjhr3EYn-DYA99YU6zIw";
+  //final String BASE_URL = "http://localhost:8080/d2d/image/";
+  static final String BASE_URL = "http://10.0.2.2:8080/d2d/image/";
 
   @override
   void initState() {
@@ -80,19 +82,19 @@ class _ItemDetailPageState extends State<ItemDetailPage> {
                           },
                           children: <Widget>[
                             Image.network(
-                              model.imageName,
+                              BASE_URL + model.imageName,
                               height: 150.0,
                             ),
                             Image.network(
-                              model.imageName,
+                              BASE_URL + model.imageName,
                               height: 150.0,
                             ),
                             Image.network(
-                              model.imageName,
+                              BASE_URL + model.imageName,
                               height: 150.0,
                             ),
                             Image.network(
-                              model.imageName,
+                              BASE_URL + model.imageName,
                               height: 150.0,
                             )
                           ],
@@ -181,8 +183,7 @@ class _ItemDetailPageState extends State<ItemDetailPage> {
                   ),
                   Padding(
                     padding: EdgeInsets.only(top: 10.0),
-                    child: Text(
-                        "Flutter: Bubble tab indicator for TabBar. Using a Stack Widget and then adding elements to stack on different levels(stacking components like Tabs, above"),
+                    child: Text("Shiv Jyoti"),
                   )
                 ],
               ),
@@ -210,8 +211,8 @@ class _ItemDetailPageState extends State<ItemDetailPage> {
                         style: TextStyle(fontSize: 12.0, color: Colors.grey),
                       ),
                     ),
-                  //  Text("\$${model.price.toString()}"
-                        Text("100.0",
+                    //  Text("\$${model.price.toString()}"
+                    Text("100.0",
                         style: TextStyle(
                             fontSize: 25.0, fontWeight: FontWeight.w600)),
                   ],
@@ -225,8 +226,9 @@ class _ItemDetailPageState extends State<ItemDetailPage> {
                     onTap: () async {
                       try {
                         controller.removeFromCart(model.id);
-                        ScaffoldMessenger.of(context)
-                            .showSnackBar(SnackBar(content: Text("Item removed from cart successfully")));
+                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                            content:
+                                Text("Item removed from cart successfully")));
                       } catch (e) {
                         print(e);
                       }
@@ -235,16 +237,19 @@ class _ItemDetailPageState extends State<ItemDetailPage> {
                 }
                 return CustomButton(
                   name: "ADD TO CART",
-                  onTap: controller.isLoading ? null : ()  async {
-                    try {
-                      var result = await controller.addToCart(model);
-                      controller.getCardList();
-                      ScaffoldMessenger.of(context)
-                          .showSnackBar(SnackBar(content: Text("Item added in cart successfully")));
-                    } catch (e) {
-                      print(e);
-                    }
-                  },
+                  onTap: controller.isLoading
+                      ? null
+                      : () async {
+                          try {
+                            var result = await controller.addToCart(model);
+                            controller.getCardList();
+                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                                content:
+                                    Text("Item added in cart successfully")));
+                          } catch (e) {
+                            print(e);
+                          }
+                        },
                 );
               })
             ],

@@ -94,6 +94,8 @@ class ShopItemListing extends StatelessWidget {
 
 class ItemView extends StatelessWidget {
   final Item item;
+  //final String BASE_URL = "http://localhost:8080/d2d/image/";
+  static final String BASE_URL = "http://10.0.2.2:8080/d2d/image/";
 
   ItemView({required this.item});
 
@@ -132,7 +134,7 @@ class ItemView extends StatelessWidget {
                             Expanded(
                               child: Container(
                                 child: Image.network(
-                                  item.imageName,
+                                BASE_URL +  item.imageName,
                                   fit: BoxFit.contain,
                                 ),
                               ),

@@ -5,7 +5,7 @@ import 'package:http/http.dart' as HTTP;
 
 class ApiService {
   //static final String _BASE_URL = "http://dummy.restapiexample.com/api/v1";
-  static final String BASE_URL = "http://192.168.1.106:8080/d2d";
+  static final String BASE_URL = "http://10.0.2.2:8080/d2d";//""http://192.168.1.106:8080/d2d";
   static const _TIMEOUT = Duration(seconds: 10);
 
   fetchData(String url) async {
