@@ -3,6 +3,7 @@ import 'package:d2d_flutter/models/Item.dart';
 import 'package:d2d_flutter/pages/CartPage.dart';
 import 'package:d2d_flutter/pages/ItemDetailPage.dart';
 import 'package:d2d_flutter/services/itemService.dart';
+import 'package:d2d_flutter/utils/api-const.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -94,8 +95,7 @@ class ShopItemListing extends StatelessWidget {
 
 class ItemView extends StatelessWidget {
   final Item item;
-  //final String BASE_URL = "http://localhost:8080/d2d/image/";
-  static final String BASE_URL = "http://10.0.2.2:8080/d2d/image/";
+  static final String BASE_URL = ApiConst.IMG_BASE_URL;
 
   ItemView({required this.item});
 
@@ -177,8 +177,8 @@ class ItemView extends StatelessWidget {
                         children: <Widget>[
                           Padding(
                             padding: EdgeInsets.only(right: 10.0),
-                            child: Text("0.0",
-                             // "\$${item.price.toString()}",
+                            child: Text(
+                              "${item.price.unitPrice}",
                               style: TextStyle(fontWeight: FontWeight.w500),
                             ),
                           )

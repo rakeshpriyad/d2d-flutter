@@ -1,10 +1,11 @@
 import 'package:d2d_flutter/controller/homePageController.dart';
 import 'package:d2d_flutter/models/Item.dart';
+import 'package:d2d_flutter/utils/api-const.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class CartPage extends StatelessWidget {
-  static final String BASE_URL = "http://10.0.2.2:8080/d2d/image/";
+  static final String BASE_URL = ApiConst.IMG_BASE_URL;
 
   Widget generateCart(BuildContext context, Item d) {
     return Padding(

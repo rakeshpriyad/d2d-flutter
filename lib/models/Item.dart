@@ -1,3 +1,6 @@
+import 'package:d2d_flutter/models/ItemPrice.dart';
+import 'package:d2d_flutter/models/ItemQuantity.dart';
+
 class Item {
   String id;
   String name;
@@ -6,11 +9,13 @@ class Item {
   String productId;
   bool available = false;
   String imageName;
+  ItemQuantity quantity;
+  ItemPrice price;
   //String region;
   //String regionVariant;
   //ProductResponse product;
-//  ItemQuantity quantity;
-//  ItemPrice price;
+
+
 //  LocalDateTime purchaseDate;
 //  LocalDateTime saleDate;
 
@@ -23,8 +28,9 @@ class Item {
       required this.itemCode,
       required this.productId,
       required this.available,
-      required this.imageName
-
+      required this.imageName,
+      required this.quantity,
+      required this.price
       });
 
   factory Item.fromJson(Map<String, dynamic> json) {
@@ -36,6 +42,8 @@ class Item {
       productId: json['productId'],
       available: json['available'],
       imageName: json['imageName'],
+      quantity: ItemQuantity.fromJson(json['quantity']),
+      price: ItemPrice.fromJson(json['price'])
     );
   }
 }

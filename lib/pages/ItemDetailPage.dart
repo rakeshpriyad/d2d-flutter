@@ -1,5 +1,6 @@
 import 'package:d2d_flutter/controller/homePageController.dart';
 import 'package:d2d_flutter/models/Item.dart';
+import 'package:d2d_flutter/utils/api-const.dart';
 import 'package:d2d_flutter/widgets/CustomButton.dart';
 import 'package:d2d_flutter/widgets/DotWidget.dart';
 import 'package:flutter/material.dart';
@@ -17,14 +18,10 @@ class ItemDetailPage extends StatefulWidget {
 class _ItemDetailPageState extends State<ItemDetailPage> {
   late PageController pageController;
   int active = 0;
-  String image =
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRc_R7jxbs8Mk2wjW9bG6H9JDbyEU_hRHmjhr3EYn-DYA99YU6zIw";
-  //final String BASE_URL = "http://localhost:8080/d2d/image/";
-  static final String BASE_URL = "http://10.0.2.2:8080/d2d/image/";
+  String BASE_URL = ApiConst.IMG_BASE_URL;
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     pageController = PageController(initialPage: 0);
   }
@@ -46,7 +43,6 @@ class _ItemDetailPageState extends State<ItemDetailPage> {
   Widget build(BuildContext context) {
     HomePageController controller = Get.find<HomePageController>();
     Item model = controller.getItem(widget.itemId);
-    // TODO: implement build
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
@@ -183,7 +179,7 @@ class _ItemDetailPageState extends State<ItemDetailPage> {
                   ),
                   Padding(
                     padding: EdgeInsets.only(top: 10.0),
-                    child: Text("Shiv Jyoti"),
+                    child: Text("Shiv Jyoti897987"),
                   )
                 ],
               ),
@@ -211,8 +207,7 @@ class _ItemDetailPageState extends State<ItemDetailPage> {
                         style: TextStyle(fontSize: 12.0, color: Colors.grey),
                       ),
                     ),
-                    //  Text("\$${model.price.toString()}"
-                    Text("100.0",
+                    Text("${model.price.unitPrice}",
                         style: TextStyle(
                             fontSize: 25.0, fontWeight: FontWeight.w600)),
                   ],
