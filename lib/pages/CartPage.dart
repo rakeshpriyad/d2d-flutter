@@ -1,4 +1,5 @@
 import 'package:d2d_flutter/controller/homePageController.dart';
+import 'package:d2d_flutter/models/CartItem.dart';
 import 'package:d2d_flutter/models/Item.dart';
 import 'package:d2d_flutter/utils/api-const.dart';
 import 'package:flutter/material.dart';
@@ -7,7 +8,7 @@ import 'package:get/get.dart';
 class CartPage extends StatelessWidget {
   static final String BASE_URL = ApiConst.IMG_BASE_URL;
 
-  Widget generateCart(BuildContext context, Item d) {
+  Widget generateCart(BuildContext context, CartItem d) {
     return Padding(
       padding: EdgeInsets.all(5.0),
       child: Container(
@@ -54,7 +55,7 @@ class CartPage extends StatelessWidget {
                         alignment: Alignment.bottomRight,
                         child: InkResponse(
                           onTap: () {
-                            Get.find<HomePageController>().removeFromCart(d.id);
+                            Get.find<HomePageController>().removeFromCart(d.id!);
                             ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                                 content: Text(
                                     "Item removed from cart successfully")));
@@ -84,9 +85,11 @@ class CartPage extends StatelessWidget {
     );
   }
 
-  getItemTotal(List<Item> items) {
+  getItemTotal(List<CartItem> cartItems) {
     double sum = 0.0;
-    // items.forEach((e){sum += e.price;});
+    cartItems.forEach((e) {
+      sum += e.price.unitPrice;
+    });
     return "\$$sum";
   }
 

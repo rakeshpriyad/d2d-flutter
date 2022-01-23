@@ -237,7 +237,7 @@ class _ItemDetailPageState extends State<ItemDetailPage> {
                       : () async {
                           try {
                             var result = await controller.addToCart(model);
-                            controller.getCardList();
+                            controller.getCartList();
                             ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                                 content:
                                     Text("Item added in cart successfully")));

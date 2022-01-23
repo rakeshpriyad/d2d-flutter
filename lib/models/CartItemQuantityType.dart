@@ -1,0 +1,5 @@
+
+
+class CartItemQuantityType {
+  String?  type;
+}

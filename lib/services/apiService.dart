@@ -1,12 +1,15 @@
 import 'dart:async';
 import 'dart:convert';
+import 'package:d2d_flutter/models/CartItem.dart';
 import 'package:d2d_flutter/models/Item.dart';
+import 'package:d2d_flutter/utils/api-const.dart';
+import 'package:d2d_flutter/utils/http_exception.dart';
 import 'package:http/http.dart' as HTTP;
 
 class ApiService {
-  static final String BASE_URL = "http://10.0.2.2:8080/d2d";
+  static final String BASE_URL =
+      ApiConst.BASE_URL; //"http://10.0.2.2:8080/d2d";
 
-  //""http://192.168.1.106:8080/d2d";
   static const _TIMEOUT = Duration(seconds: 10);
 
   fetchData(String url) async {
@@ -38,9 +41,64 @@ class ApiService {
 
   Future getItemsRecord() async {}
 
-  Future getCartList() async {}
+  Future getCartList() async {
+    var url = '${BASE_URL}/cart/items/rakesh';
+    List<CartItem> listCartItems = [];
+    try {
+      final response = await HTTP.get(Uri.parse(url)).timeout(_TIMEOUT);
+      if (response.statusCode == 200) {
+        final parsed = jsonDecode(response.body) as List<dynamic>;
+        print(parsed);
+        for (var i = 0; i < parsed.length; i++) {
+          Map<String, dynamic> map = parsed[i];
+          listCartItems.add(CartItem.fromJson(map));
+        }
+      }
+    } catch (e) {
+      throw e;
+    }
+    return listCartItems;
+  }
 
-  Future addToCart(Item data) async {}
+  Future addToCart(CartItem data) async {
+    var url = '${BASE_URL}/cart/add';
+    String? inStock = "true";
+    if(data.available !=null){
+      inStock = "true";
+    }else {
+      inStock = "false";
+    }
+    var postData  =jsonEncode(<String, String>{
+      'id': "",
+      'name': data.name,
+      'description': data.description,
+      'itemCode': data.itemCode,
+      'available': inStock,
+      'imageName': data.imageName,
+      'itemId': data.itemId,
+      'quantity': "{}",
+      'price': "{}",
+      'userName': data.userName
+    });
+
+    final response = await HTTP
+        .post(
+          Uri.parse(url),
+          headers: <String, String>{
+            'Content-Type': 'application/json; charset=UTF-8',
+            "Access-Control-Allow-Origin": "*",
+          },
+          body: postData,
+        )
+        .timeout(_TIMEOUT);
+    final responseData = jsonDecode(response.body) as List<dynamic>;//json.decode(response.body);
+    print(responseData);
+  /*  if (responseData['error'] != null) {
+      throw HttpException(responseData['error']['message']);
+    }*/
+
+    //return response;
+  }
 
   Future removeFromCart(String shopId) async {}
 }

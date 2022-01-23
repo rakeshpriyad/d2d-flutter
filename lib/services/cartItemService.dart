@@ -1,18 +1,16 @@
 
+import 'package:d2d_flutter/models/CartItem.dart';
 import 'package:d2d_flutter/models/Item.dart';
 import 'package:d2d_flutter/services/apiService.dart';
 import 'package:d2d_flutter/services/storageService.dart';
 
-class ItemServices {
+class CartItemServices {
   ApiService apiService = ApiService();
   StorageService storageService = StorageService();
 
   Future<List<Item>> getShoppingItems() async {
     return await apiService.loadAndParseShopItemModels();
   }
-
-//  List<ShopItemModel> get items => getShoppingItems();
-
 
   loadItems() async {
     return getShoppingItems();
@@ -26,4 +24,15 @@ class ItemServices {
     return await apiService.setItemAsFavourite(id, flag);
   }
 
+  Future addToCart(CartItem data) async {
+    return await apiService.addToCart(data);
+  }
+
+  Future getCartList() async {
+    return await apiService.getCartList();
+  }
+
+  removeFromCart(String id) async {
+    return await apiService.removeFromCart(id);
+  }
 }
