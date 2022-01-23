@@ -1,7 +1,7 @@
 import 'package:d2d_flutter/controller/homePageController.dart';
 import 'package:d2d_flutter/models/Item.dart';
 import 'package:d2d_flutter/pages/CartPage.dart';
-import 'package:d2d_flutter/pages/ItemDetail.dart';
+import 'package:d2d_flutter/pages/ItemDetailPage.dart';
 import 'package:d2d_flutter/services/itemService.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
