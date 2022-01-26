@@ -24,19 +24,19 @@ class _HomePageState extends State<HomePage1> {
   }
 
   void sliderImage() {
-    listImage.add("images/slider_img.webp");
-    listImage.add("images/slider_img.webp");
-    listImage.add("images/slider_img.webp");
+    listImage.add("assets/images/slider_img.webp");
+    listImage.add("assets/images/slider_img.webp");
+    listImage.add("assets/images/slider_img.webp");
   }
 
   void shoesImage() {
-    listShoesImage.add("images/shoes_1.png");
-    listShoesImage.add("images/shoes_2.png");
-    listShoesImage.add("images/shoes_3.png");
-    listShoesImage.add("images/shoes_4.png");
-    listShoesImage.add("images/shoes_5.png");
-    listShoesImage.add("images/shoes_6.png");
-    listShoesImage.add("images/shoes_7.png");
+    listShoesImage.add("assets/images/shoes_1.png");
+    listShoesImage.add("assets/images/shoes_2.png");
+    listShoesImage.add("assets/images/shoes_3.png");
+    listShoesImage.add("assets/images/shoes_4.png");
+    listShoesImage.add("assets/images/shoes_5.png");
+    listShoesImage.add("assets/images/shoes_6.png");
+    listShoesImage.add("assets/images/shoes_7.png");
   }
 
   @override

@@ -24,21 +24,21 @@ class _ProfilePageState1 extends State<ProfilePage1> {
   }
 
   void createListItem() {
-    listSection.add(createSection("Notifications", "images/ic_notification.png",
+    listSection.add(createSection("Notifications", "assets/images/ic_notification.png",
         Colors.blue.shade800, NotificationPage1()));
     listSection.add(createSection(
-        "Payment Method", "images/ic_payment.png", Colors.teal.shade800, null));
+        "Payment Method", "assets/images/ic_payment.png", Colors.teal.shade800, null));
     listSection.add(createSection(
-        "Settings", "images/ic_settings.png", Colors.red.shade800, null));
+        "Settings", "assets/images/ic_settings.png", Colors.red.shade800, null));
     listSection.add(createSection(
         "Invite Friends",
-        "images/ic_invite_friends.png",
+        "assets/images/ic_invite_friends.png",
         Colors.indigo.shade800,
         InviteFriendsPage1()));
-    listSection.add(createSection("About Us", "images/ic_about_us.png",
+    listSection.add(createSection("About Us", "assets/images/ic_about_us.png",
         Colors.black.withOpacity(0.8), AboutPage1()));
     listSection.add(createSection(
-        "Logout", "images/ic_logout.png", Colors.red.withOpacity(0.7), null));
+        "Logout", "assets/images/ic_logout.png", Colors.red.withOpacity(0.7), null));
   }
 
   createSection(String title, String icon, Color color, Widget? widget) {
@@ -70,7 +70,7 @@ class _ProfilePageState1 extends State<ProfilePage1> {
             height: 60,
             decoration: BoxDecoration(
                 image: DecorationImage(
-                    image: AssetImage("images/ic_user_profile.png")),
+                    image: AssetImage("assets/images/ic_user_profile.png")),
                 borderRadius: BorderRadius.all(Radius.circular(24))),
           ),
           Utils.getSizedBox(width: 10),

@@ -90,7 +90,7 @@ class _CheckOutPageState extends State<CheckOutPage> {
                 child: Align(
                   alignment: Alignment.bottomCenter,
                   child: Image(
-                    image: AssetImage("images/ic_thank_you.png"),
+                    image: AssetImage("assets/images/ic_thank_you.png"),
                     width: 300,
                   ),
                 ),

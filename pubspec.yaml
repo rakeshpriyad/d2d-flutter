@@ -37,6 +37,8 @@ dependencies:
   big_decimal: ^0.3.1
   provider: ^4.1.2
   money_formatter: ^0.0.3
+  flutter_rating_bar: ^1.1.0
+
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
@@ -73,6 +75,40 @@ flutter:
   # assets:
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
+  assets:
+    - assets/images/ic_logo.png
+    - assets/images/slider_img.webp
+    - assets/images/shoes_1.png
+    - assets/images/shoes_2.png
+    - assets/images/shoes_3.png
+    - assets/images/shoes_4.png
+    - assets/images/shoes_5.png
+    - assets/images/shoes_6.png
+    - assets/images/ic_thank_you.png
+    - assets/images/shoes_7.png
+    - assets/images/ic_user_profile.png
+    - assets/images/details_shoes_image.webp
+    - assets/images/ic_about_us.png
+    - assets/images/ic_invite_friends.png
+    - assets/images/ic_notification.png
+    - assets/images/ic_payment.png
+    - assets/images/ic_refer_friends_bg.jpg
+    - assets/images/ic_logout.png
+    - assets/images/ic_reward_credits.png
+    - assets/images/ic_promo_code.png
+    - assets/images/ic_settings.png
+    - assets/images/ic_qr_code.svg
+    - assets/images/ic_qr_code.png
+    - assets/images/ic_support.png
+    - assets/images/ic_chair.png
+    - assets/images/ic_chair1.png
+    - assets/images/ic_chair2.png
+    - assets/images/ic_chair4.png
+    - assets/images/ic_table.png
+    - assets/images/ic_table1.png
+    - assets/images/ic_search.png
+    - assets/images/ic_shopping_cart.png
+
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

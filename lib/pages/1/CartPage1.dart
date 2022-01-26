@@ -118,7 +118,7 @@ class _CartPageState1 extends State<CartPage1> {
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.all(Radius.circular(14)),
                     color: Colors.blue.shade200,
-                    image: DecorationImage(image: AssetImage("images/shoes_1.png"))),
+                    image: DecorationImage(image: AssetImage("assets/images/shoes_1.png"))),
               ),
               Expanded(
                 child: Container(

@@ -27,13 +27,13 @@ class _SearchPageState1 extends State<SearchPage1> {
   }
 
   void shoesImage() {
-    listShoesImage.add("images/shoes_1.png");
-    listShoesImage.add("images/shoes_2.png");
-    listShoesImage.add("images/shoes_3.png");
-    listShoesImage.add("images/shoes_4.png");
-    listShoesImage.add("images/shoes_5.png");
-    listShoesImage.add("images/shoes_6.png");
-    listShoesImage.add("images/shoes_7.png");
+    listShoesImage.add("assets/images/shoes_1.png");
+    listShoesImage.add("assets/images/shoes_2.png");
+    listShoesImage.add("assets/images/shoes_3.png");
+    listShoesImage.add("assets/images/shoes_4.png");
+    listShoesImage.add("assets/images/shoes_5.png");
+    listShoesImage.add("assets/images/shoes_6.png");
+    listShoesImage.add("assets/images/shoes_7.png");
   }
 
   @override
@@ -265,7 +265,7 @@ class _SearchPageState1 extends State<SearchPage1> {
               decoration: BoxDecoration(
                 color: Colors.teal.shade200,
                 image: DecorationImage(
-                    image: AssetImage("images/shoes_1.png"), fit: BoxFit.cover),
+                    image: AssetImage("assets/images/shoes_1.png"), fit: BoxFit.cover),
               ),
             ),
             flex: 70,
@@ -363,7 +363,7 @@ class _SearchPageState1 extends State<SearchPage1> {
               decoration: BoxDecoration(
                 color: Colors.teal.shade200,
                 image: DecorationImage(
-                    image: AssetImage("images/shoes_1.png"), fit: BoxFit.cover),
+                    image: AssetImage("assets/images/shoes_1.png"), fit: BoxFit.cover),
               ),
             ),
             flex: 70,

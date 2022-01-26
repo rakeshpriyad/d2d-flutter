@@ -23,19 +23,19 @@ class _ProfilePage2State extends State<ProfilePage2> {
   }
 
   void createListItem() {
-    listSection.add(createSection("Notifications", "images/ic_notification.png",
+    listSection.add(createSection("Notifications", "assets/images/ic_notification.png",
         Colors.blue.shade800, NotificationPage1()));
     listSection.add(createSection(
-        "Payment Method", "images/ic_payment.png", Colors.teal.shade800, null));
+        "Payment Method", "assets/images/ic_payment.png", Colors.teal.shade800, null));
     listSection.add(createSection(
         "Invite Friends",
-        "images/ic_invite_friends.png",
+        "assets/images/ic_invite_friends.png",
         Colors.indigo.shade800,
         InviteFriendsPage1()));
-    listSection.add(createSection("About Us", "images/ic_about_us.png",
+    listSection.add(createSection("About Us", "assets/images/ic_about_us.png",
         Colors.black.withOpacity(0.8), AboutPage1()));
     listSection.add(createSection(
-        "Logout", "images/ic_logout.png", Colors.red.withOpacity(0.7), null));
+        "Logout", "assets/images/ic_logout.png", Colors.red.withOpacity(0.7), null));
   }
 
   createSection(String title, String icon, Color color, Widget? widget) {
@@ -195,7 +195,7 @@ class _ProfilePage2State extends State<ProfilePage2> {
                                   shape: BoxShape.circle,
                                   image: DecorationImage(
                                       image: AssetImage(
-                                          "images/ic_user_profile.png"),
+                                          "assets/images/ic_user_profile.png"),
                                       fit: BoxFit.contain)),
                               width: 100,
                               height: 100,
