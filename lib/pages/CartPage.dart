@@ -1,6 +1,6 @@
-import 'package:d2d_flutter/controller/homePageController.dart';
+import 'package:d2d_flutter/controller/D2DController.dart';
 import 'package:d2d_flutter/models/CartItem.dart';
-import 'package:d2d_flutter/pages/CheckOutPage.dart';
+import 'package:d2d_flutter/pages/SelectAddressPage.dart';
 import 'package:d2d_flutter/utils/api-const.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -96,7 +96,6 @@ class CartPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final controller = Get.find<HomePageController>();
 
-    // TODO: implement build
     return Scaffold(
       appBar: AppBar(
         title: Text("Cart list"),
@@ -153,7 +152,7 @@ class CartPage extends StatelessWidget {
                 child: ElevatedButton(
                     onPressed: () {
                       Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => CheckOutPage()));
+                          MaterialPageRoute(builder: (context) => SelectAddressPage()));
                     },
                     child: Container(
                       alignment: Alignment.center,

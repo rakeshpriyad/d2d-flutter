@@ -1,4 +1,4 @@
-import 'package:d2d_flutter/controller/homePageController.dart';
+import 'package:d2d_flutter/controller/D2DController.dart';
 import 'package:d2d_flutter/models/Item.dart';
 import 'package:d2d_flutter/pages/CartPage.dart';
 import 'package:d2d_flutter/pages/ItemDetailPage.dart';

@@ -1,5 +1,6 @@
-import 'package:d2d_flutter/controller/homePageController.dart';
+import 'package:d2d_flutter/controller/D2DController.dart';
 import 'package:d2d_flutter/models/CartItem.dart';
+import 'package:d2d_flutter/pages/OrderPlacePage.dart';
 import 'package:d2d_flutter/utils/CustomTextStyle.dart';
 import 'package:d2d_flutter/utils/api-const.dart';
 import 'package:flutter/material.dart';
@@ -7,8 +8,6 @@ import 'package:get/get.dart';
 import 'package:money_formatter/money_formatter.dart';
 
 class CheckOutPage extends StatefulWidget {
-
-
   @override
   _CheckOutPageState createState() => _CheckOutPageState();
 }
@@ -19,7 +18,6 @@ class _CheckOutPageState extends State<CheckOutPage> {
 
   @override
   Widget build(BuildContext context) {
-
     return MaterialApp(
       home: Scaffold(
         key: _scaffoldKey,
@@ -27,12 +25,15 @@ class _CheckOutPageState extends State<CheckOutPage> {
         appBar: AppBar(
           backgroundColor: Colors.white,
           leading: IconButton(
-              icon: Icon(Icons.arrow_back,color: Colors.black,),
+              icon: Icon(
+                Icons.arrow_back,
+                color: Colors.black,
+              ),
               onPressed: () {
                 Navigator.pop(context);
               }),
           title: Text(
-            "ADDRESS",
+            "Back",
             style: TextStyle(color: Colors.black, fontSize: 14),
           ),
         ),
@@ -42,7 +43,12 @@ class _CheckOutPageState extends State<CheckOutPage> {
               Expanded(
                 child: Container(
                   child: ListView(
-                    children: <Widget>[selectedAddressSection(), standardDelivery(), checkoutItem(), priceSection()],
+                    children: <Widget>[
+                      /*selectedAddressSection(),*/
+                      standardDelivery(),
+                      checkoutItem(),
+                      priceSection()
+                    ],
                   ),
                 ),
                 flex: 90,
@@ -53,14 +59,16 @@ class _CheckOutPageState extends State<CheckOutPage> {
                   margin: EdgeInsets.symmetric(vertical: 8, horizontal: 12),
                   child: RaisedButton(
                     onPressed: () {
-                      /*Navigator.of(context).push(new MaterialPageRoute(
-                          builder: (context) => OrderPlacePage()));*/
-                      showThankYouBottomSheet(context);
+                      Navigator.of(context).push(new MaterialPageRoute(
+                          builder: (context) => OrderPlacePage()));
+                      // showThankYouBottomSheet(context);
                     },
                     child: Text(
                       "Place Order",
-                      style: CustomTextStyle.textFormFieldMedium
-                          .copyWith(color: Colors.white, fontSize: 14, fontWeight: FontWeight.bold),
+                      style: CustomTextStyle.textFormFieldMedium.copyWith(
+                          color: Colors.white,
+                          fontSize: 14,
+                          fontWeight: FontWeight.bold),
                     ),
                     color: Colors.pink,
                     textColor: Colors.white,
@@ -82,7 +90,8 @@ class _CheckOutPageState extends State<CheckOutPage> {
         decoration: BoxDecoration(
             color: Colors.white,
             border: Border.all(color: Colors.grey.shade200, width: 2),
-            borderRadius: BorderRadius.only(topRight: Radius.circular(16), topLeft: Radius.circular(16))),
+            borderRadius: BorderRadius.only(
+                topRight: Radius.circular(16), topLeft: Radius.circular(16))),
         child: Column(
           children: <Widget>[
             Expanded(
@@ -108,8 +117,8 @@ class _CheckOutPageState extends State<CheckOutPage> {
                           TextSpan(
                             text:
                                 "\n\nThank you for your purchase. Our company values each and every customer. We strive to provide state-of-the-art devices that respond to our clients’ individual needs. If you have any questions or feedback, please don’t hesitate to reach out.",
-                            style:
-                                CustomTextStyle.textFormFieldMedium.copyWith(fontSize: 14, color: Colors.grey.shade800),
+                            style: CustomTextStyle.textFormFieldMedium.copyWith(
+                                fontSize: 14, color: Colors.grey.shade800),
                           )
                         ])),
                     SizedBox(
@@ -120,10 +129,12 @@ class _CheckOutPageState extends State<CheckOutPage> {
                       padding: EdgeInsets.only(left: 48, right: 48),
                       child: Text(
                         "Track Order",
-                        style: CustomTextStyle.textFormFieldMedium.copyWith(color: Colors.white),
+                        style: CustomTextStyle.textFormFieldMedium
+                            .copyWith(color: Colors.white),
                       ),
                       color: Colors.pink,
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(24))),
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(24))),
                     )
                   ],
                 ),
@@ -135,7 +146,8 @@ class _CheckOutPageState extends State<CheckOutPage> {
       );
     },
         shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.only(topLeft: Radius.circular(16), topRight: Radius.circular(16))),
+            borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(16), topRight: Radius.circular(16))),
         backgroundColor: Colors.white,
         elevation: 2);
   }
@@ -148,10 +160,12 @@ class _CheckOutPageState extends State<CheckOutPage> {
       ),
       child: Card(
         elevation: 0,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(4))),
+        shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(Radius.circular(4))),
         child: Container(
           decoration: BoxDecoration(
-              borderRadius: BorderRadius.all(Radius.circular(4)), border: Border.all(color: Colors.grey.shade200)),
+              borderRadius: BorderRadius.all(Radius.circular(4)),
+              border: Border.all(color: Colors.grey.shade200)),
           padding: EdgeInsets.only(left: 12, top: 8, right: 12),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -164,23 +178,26 @@ class _CheckOutPageState extends State<CheckOutPage> {
                 children: <Widget>[
                   Text(
                     "James Francois (Default)",
-                    style: CustomTextStyle.textFormFieldSemiBold.copyWith(fontSize: 14),
+                    style: CustomTextStyle.textFormFieldSemiBold
+                        .copyWith(fontSize: 14),
                   ),
                   Container(
-                    padding: EdgeInsets.only(left: 8, right: 8, top: 4, bottom: 4),
+                    padding:
+                        EdgeInsets.only(left: 8, right: 8, top: 4, bottom: 4),
                     decoration: BoxDecoration(
                         shape: BoxShape.rectangle,
                         color: Colors.grey.shade300,
                         borderRadius: BorderRadius.all(Radius.circular(16))),
                     child: Text(
                       "HOME",
-                      style:
-                          CustomTextStyle.textFormFieldBlack.copyWith(color: Colors.indigoAccent.shade200, fontSize: 8),
+                      style: CustomTextStyle.textFormFieldBlack.copyWith(
+                          color: Colors.indigoAccent.shade200, fontSize: 8),
                     ),
                   )
                 ],
               ),
-              createAddressText("431, Commerce House, Nagindas Master, Fort", 16),
+              createAddressText(
+                  "431, Commerce House, Nagindas Master, Fort", 16),
               createAddressText("Mumbai - 400023", 6),
               createAddressText("Maharashtra", 6),
               SizedBox(
@@ -190,10 +207,12 @@ class _CheckOutPageState extends State<CheckOutPage> {
                 text: TextSpan(children: [
                   TextSpan(
                       text: "Mobile : ",
-                      style: CustomTextStyle.textFormFieldMedium.copyWith(fontSize: 12, color: Colors.grey.shade800)),
+                      style: CustomTextStyle.textFormFieldMedium
+                          .copyWith(fontSize: 12, color: Colors.grey.shade800)),
                   TextSpan(
                       text: "02222673745",
-                      style: CustomTextStyle.textFormFieldBold.copyWith(color: Colors.black, fontSize: 12)),
+                      style: CustomTextStyle.textFormFieldBold
+                          .copyWith(color: Colors.black, fontSize: 12)),
                 ]),
               ),
               SizedBox(
@@ -217,7 +236,8 @@ class _CheckOutPageState extends State<CheckOutPage> {
       margin: EdgeInsets.only(top: topMargin),
       child: Text(
         strAddress,
-        style: CustomTextStyle.textFormFieldMedium.copyWith(fontSize: 12, color: Colors.grey.shade800),
+        style: CustomTextStyle.textFormFieldMedium
+            .copyWith(fontSize: 12, color: Colors.grey.shade800),
       ),
     );
   }
@@ -233,7 +253,8 @@ class _CheckOutPageState extends State<CheckOutPage> {
             onPressed: () {},
             child: Text(
               "Edit / Change",
-              style: CustomTextStyle.textFormFieldSemiBold.copyWith(fontSize: 12, color: Colors.indigo.shade700),
+              style: CustomTextStyle.textFormFieldSemiBold
+                  .copyWith(fontSize: 12, color: Colors.indigo.shade700),
             ),
             splashColor: Colors.transparent,
             highlightColor: Colors.transparent,
@@ -252,7 +273,8 @@ class _CheckOutPageState extends State<CheckOutPage> {
           FlatButton(
             onPressed: () {},
             child: Text("Add New Address",
-                style: CustomTextStyle.textFormFieldSemiBold.copyWith(fontSize: 12, color: Colors.indigo.shade700)),
+                style: CustomTextStyle.textFormFieldSemiBold
+                    .copyWith(fontSize: 12, color: Colors.indigo.shade700)),
             splashColor: Colors.transparent,
             highlightColor: Colors.transparent,
           ),
@@ -268,7 +290,8 @@ class _CheckOutPageState extends State<CheckOutPage> {
     return Container(
       decoration: BoxDecoration(
           borderRadius: BorderRadius.all(Radius.circular(4)),
-          border: Border.all(color: Colors.tealAccent.withOpacity(0.4), width: 1),
+          border:
+              Border.all(color: Colors.tealAccent.withOpacity(0.4), width: 1),
           color: Colors.tealAccent.withOpacity(0.2)),
       margin: EdgeInsets.all(8),
       child: Row(
@@ -286,8 +309,10 @@ class _CheckOutPageState extends State<CheckOutPage> {
             children: <Widget>[
               Text(
                 "Standard Delivery",
-                style: CustomTextStyle.textFormFieldMedium
-                    .copyWith(color: Colors.black, fontSize: 14, fontWeight: FontWeight.w600),
+                style: CustomTextStyle.textFormFieldMedium.copyWith(
+                    color: Colors.black,
+                    fontSize: 14,
+                    fontWeight: FontWeight.w600),
               ),
               SizedBox(
                 height: 5,
@@ -309,55 +334,30 @@ class _CheckOutPageState extends State<CheckOutPage> {
   checkoutItem() {
     final controller = Get.find<HomePageController>();
     return Container(
-      margin: EdgeInsets.all(4),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.all(Radius.circular(4)),
-      ),
-      child: Card(
-        elevation: 0,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(4))),
-        child: Container(
-          decoration: BoxDecoration(
-              borderRadius: BorderRadius.all(Radius.circular(4)), border: Border.all(color: Colors.grey.shade200)),
-          padding: EdgeInsets.only(left: 12, top: 8, right: 12, bottom: 8),
-          child:
-          ListView(
-            shrinkWrap: true,
-            children: controller.cartItems
-                .map((d) => generateCheckOutItem(context, d))
-                .toList(),
-          )
-    )
-          /*ListView.builder(
-            itemBuilder: (context, position) {
-              List<Widget> cL = [];
-             Container l = checkoutListItem();
-            for(var i=0; i< controller.cartItems.length; i++) {
-             //cL.add(checkoutListItem());
-cL.add(generateCheckOutItem(context, controller.cartItems[i]));
-            }
-
-            return cL;
-            }*/
-          /*ListView(
-          shrinkWrap: true,
-          children: controller.cartItems
-              .map((d) => generateCheckOutItem(context, d))
-              .toList(),
-        )
-          //,
-            //itemCount: 3,
-            //shrinkWrap: true,
-           // primary: false,
-           // scrollDirection: Axis.vertical,
-          ),
+        margin: EdgeInsets.all(4),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.all(Radius.circular(4)),
         ),
-      ),*/
-    ));
+        child: Card(
+            elevation: 0,
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.all(Radius.circular(4))),
+            child: Container(
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.all(Radius.circular(4)),
+                    border: Border.all(color: Colors.grey.shade200)),
+                padding:
+                    EdgeInsets.only(left: 12, top: 8, right: 12, bottom: 8),
+                child: ListView(
+                  shrinkWrap: true,
+                  children: controller.cartItems
+                      .map((d) => generateCheckOutItem(context, d))
+                      .toList(),
+                ))));
   }
 
   Widget generateCheckOutItem(BuildContext context, CartItem checkoutItem) {
-   return checkoutListItem(checkoutItem);
+    return checkoutListItem(checkoutItem);
   }
 
   Container checkoutListItem(CartItem checkoutItem) {
@@ -372,7 +372,8 @@ cL.add(generateCheckOutItem(context, controller.cartItems[i]));
               height: 45,
               fit: BoxFit.fitHeight,
             ),
-            decoration: BoxDecoration(border: Border.all(color: Colors.grey, width: 1)),
+            decoration:
+                BoxDecoration(border: Border.all(color: Colors.grey, width: 1)),
           ),
           SizedBox(
             width: 8,
@@ -380,10 +381,13 @@ cL.add(generateCheckOutItem(context, controller.cartItems[i]));
           RichText(
             text: TextSpan(children: [
               TextSpan(
-                  text: "Estimated Delivery : ", style: CustomTextStyle.textFormFieldMedium.copyWith(fontSize: 12)),
+                  text: "₹${checkoutItem.price.unitPrice}, Estimated Delivery : ",
+                  style: CustomTextStyle.textFormFieldMedium
+                      .copyWith(fontSize: 12)),
               TextSpan(
                   text: "21 Jul 2019 ",
-                  style: CustomTextStyle.textFormFieldMedium.copyWith(fontSize: 12, fontWeight: FontWeight.w600))
+                  style: CustomTextStyle.textFormFieldMedium
+                      .copyWith(fontSize: 12, fontWeight: FontWeight.w600))
             ]),
           )
         ],
@@ -392,6 +396,7 @@ cL.add(generateCheckOutItem(context, controller.cartItems[i]));
   }
 
   priceSection() {
+    final controller = Get.find<HomePageController>();
     return Container(
       margin: EdgeInsets.all(4),
       decoration: BoxDecoration(
@@ -399,10 +404,12 @@ cL.add(generateCheckOutItem(context, controller.cartItems[i]));
       ),
       child: Card(
         elevation: 0,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(4))),
+        shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(Radius.circular(4))),
         child: Container(
           decoration: BoxDecoration(
-              borderRadius: BorderRadius.all(Radius.circular(4)), border: Border.all(color: Colors.grey.shade200)),
+              borderRadius: BorderRadius.all(Radius.circular(4)),
+              border: Border.all(color: Colors.grey.shade200)),
           padding: EdgeInsets.only(left: 12, top: 8, right: 12, bottom: 8),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -412,8 +419,10 @@ cL.add(generateCheckOutItem(context, controller.cartItems[i]));
               ),
               Text(
                 "PRICE DETAILS",
-                style: CustomTextStyle.textFormFieldMedium
-                    .copyWith(fontSize: 12, color: Colors.black, fontWeight: FontWeight.w600),
+                style: CustomTextStyle.textFormFieldMedium.copyWith(
+                    fontSize: 12,
+                    color: Colors.black,
+                    fontWeight: FontWeight.w600),
               ),
               SizedBox(
                 height: 4,
@@ -427,11 +436,16 @@ cL.add(generateCheckOutItem(context, controller.cartItems[i]));
               SizedBox(
                 height: 8,
               ),
-              createPriceItem("Total MRP", getFormattedCurrency(5197), Colors.grey.shade700),
-              createPriceItem("Bag discount", getFormattedCurrency(3280), Colors.teal.shade300),
-              createPriceItem("Tax", getFormattedCurrency(96), Colors.grey.shade700),
-              createPriceItem("Order Total", getFormattedCurrency(2013), Colors.grey.shade700),
-              createPriceItem("Delievery Charges", "FREE", Colors.teal.shade300),
+              createPriceItem("Total MRP", getOrderTotal(controller.cartItems),
+                  Colors.grey.shade700),
+              createPriceItem("Bag discount", getOrderTotal(controller.cartItems),
+                  Colors.teal.shade300),
+              createPriceItem(
+                  "Tax", getOrderTotal(controller.cartItems), Colors.grey.shade700),
+              createPriceItem("Order Total", getOrderTotal(controller.cartItems),
+                  Colors.grey.shade700),
+              createPriceItem(
+                  "Delievery Charges", "FREE", Colors.teal.shade300),
               SizedBox(
                 height: 8,
               ),
@@ -450,11 +464,13 @@ cL.add(generateCheckOutItem(context, controller.cartItems[i]));
                 children: <Widget>[
                   Text(
                     "Total",
-                    style: CustomTextStyle.textFormFieldSemiBold.copyWith(color: Colors.black, fontSize: 12),
+                    style: CustomTextStyle.textFormFieldSemiBold
+                        .copyWith(color: Colors.black, fontSize: 12),
                   ),
                   Text(
                     getFormattedCurrency(2013),
-                    style: CustomTextStyle.textFormFieldMedium.copyWith(color: Colors.black, fontSize: 12),
+                    style: CustomTextStyle.textFormFieldMedium
+                        .copyWith(color: Colors.black, fontSize: 12),
                   )
                 ],
               )
@@ -467,10 +483,17 @@ cL.add(generateCheckOutItem(context, controller.cartItems[i]));
 
   String getFormattedCurrency(double amount) {
     MoneyFormatter fmf = MoneyFormatter(amount: amount);
-    fmf.settings
-      ?.symbol = "₹";
+    fmf.settings?.symbol = "₹";
 
     return fmf.output.symbolOnLeft;
+  }
+
+  getOrderTotal(List<CartItem> checkoutItems) {
+    double sum = 0.0;
+    checkoutItems.forEach((e) {
+      sum += e.price.unitPrice;
+    });
+    return "₹$sum";
   }
 
   createPriceItem(String key, String value, Color color) {
@@ -481,11 +504,13 @@ cL.add(generateCheckOutItem(context, controller.cartItems[i]));
         children: <Widget>[
           Text(
             key,
-            style: CustomTextStyle.textFormFieldMedium.copyWith(color: Colors.grey.shade700, fontSize: 12),
+            style: CustomTextStyle.textFormFieldMedium
+                .copyWith(color: Colors.grey.shade700, fontSize: 12),
           ),
           Text(
             value,
-            style: CustomTextStyle.textFormFieldMedium.copyWith(color: color, fontSize: 12),
+            style: CustomTextStyle.textFormFieldMedium
+                .copyWith(color: color, fontSize: 12),
           )
         ],
       ),

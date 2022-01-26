@@ -11,9 +11,6 @@ class ItemServices {
     return await apiService.loadAndParseShopItemModels();
   }
 
-//  List<ShopItemModel> get items => getShoppingItems();
-
-
   loadItems() async {
     return getShoppingItems();
   }

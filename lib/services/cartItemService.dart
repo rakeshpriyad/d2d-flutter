@@ -4,7 +4,7 @@ import 'package:d2d_flutter/models/Item.dart';
 import 'package:d2d_flutter/services/apiService.dart';
 import 'package:d2d_flutter/services/storageService.dart';
 
-class CartItemServices {
+class CartItemService {
   ApiService apiService = ApiService();
   StorageService storageService = StorageService();
 

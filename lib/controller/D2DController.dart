@@ -2,16 +2,23 @@ import 'package:d2d_flutter/models/CartItem.dart';
 import 'package:d2d_flutter/models/CartItemPrice.dart';
 import 'package:d2d_flutter/models/CartItemQuantity.dart';
 import 'package:d2d_flutter/models/Item.dart';
+import 'package:d2d_flutter/models/ShippingAddress.dart';
 import 'package:d2d_flutter/services/cartItemService.dart';
 import 'package:d2d_flutter/services/itemService.dart';
+import 'package:d2d_flutter/services/orderService.dart';
+import 'package:d2d_flutter/services/shippingAddressService.dart';
 import 'package:get/get.dart';
 
 class HomePageController extends GetxController {
   ItemServices itemServices = ItemServices();
-  CartItemServices cartItemServices = CartItemServices();
+  CartItemService cartItemServices = CartItemService();
+  OrderService orderService = OrderService();
+  ShippingAddressServices addressServices = ShippingAddressServices();
   List<Item> items = [];
   List<CartItem> cartItems = [];
+  List<ShippingAddress> addressList = [];
   bool isLoading = true;
+  String selectedAddressId = "";
 
   @override
   void onInit() {
@@ -21,6 +28,7 @@ class HomePageController extends GetxController {
   loadDB() async {
     loadItems();
     getCartList();
+    getShippingAddressList();
   }
 
   getItem(String id) {
@@ -34,10 +42,15 @@ class HomePageController extends GetxController {
   getCartList() async {
     try {
       cartItems = await cartItemServices.getCartList();
-      //cartItems.clear();
-      /*list.forEach((element) {
-        cartItems.add(CartItem.fromJson(element));
-      });*/
+      update();
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  getShippingAddressList() async {
+    try {
+      addressList = await addressServices.loadAddresses();
       update();
     } catch (e) {
       print(e);
@@ -78,7 +91,8 @@ class HomePageController extends GetxController {
         quantityType: item.quantity.quantityType,
         unit: item.quantity.unit,
         discountedQuantity: item.quantity.discountedQuantity);
-    CartItemPrice price = CartItemPrice(totalPrice: item.price.totalPrice,
+    CartItemPrice price = CartItemPrice(
+        totalPrice: item.price.totalPrice,
         unitPrice: item.price.unitPrice,
         discountedPrice: item.price.discountedPrice,
         type: item.price.type,
@@ -86,7 +100,8 @@ class HomePageController extends GetxController {
         specialPrice: item.price.specialPrice,
         discountPercentage: item.price.discountPercentage);
 
-    CartItem cartItem = CartItem(id: null,
+    CartItem cartItem = CartItem(
+        id: null,
         name: item.name,
         description: item.description,
         itemCode: item.itemCode,
@@ -102,10 +117,20 @@ class HomePageController extends GetxController {
     return result;
   }
 
+  createOrderCOD(String userName, String addressId) async {
+    orderService.createCODOrder(userName, addressId);
+    update();
+  }
+
   removeFromCart(String id) async {
     cartItemServices.removeFromCart(id);
     int index = cartItems.indexWhere((element) => element.id == id);
     cartItems.removeAt(index);
+    update();
+  }
+
+  selectAddress(String selectedAddressId) async{
+    selectedAddressId = selectedAddressId;
     update();
   }
 }

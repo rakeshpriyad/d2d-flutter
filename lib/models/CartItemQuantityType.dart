@@ -1,5 +1,4 @@
 
-
 class CartItemQuantityType {
   String?  type;
 }

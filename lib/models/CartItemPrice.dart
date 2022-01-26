@@ -1,5 +1,3 @@
-import 'package:d2d_flutter/models/ItemQuantityType.dart';
-import 'package:d2d_flutter/models/ItemQuantityUnit.dart';
 
 class CartItemPrice {
   double? totalPrice;
