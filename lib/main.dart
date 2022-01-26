@@ -9,23 +9,22 @@ void main(){
   runApp(Main());
 }
 
-/*
 class Main extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      //home: HomePage(),
-      home: LoginPage(),
+      home: HomePage(),
+      //home: LoginPage(),
     );
   }
 }
-*/
 
 /**
  * with login page
  */
+/*
 class Main extends StatelessWidget {
   // This widget is the root of your application.
   @override
@@ -54,3 +53,4 @@ class Main extends StatelessWidget {
     );
   }
 }
+*/

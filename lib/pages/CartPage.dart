@@ -1,6 +1,6 @@
 import 'package:d2d_flutter/controller/homePageController.dart';
 import 'package:d2d_flutter/models/CartItem.dart';
-import 'package:d2d_flutter/models/Item.dart';
+import 'package:d2d_flutter/pages/CheckOutPage.dart';
 import 'package:d2d_flutter/utils/api-const.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -74,8 +74,7 @@ class CartPage extends StatelessWidget {
                   SizedBox(
                     height: 5.0,
                   ),
-                  //Text("Price ${d.price.toString()}"),
-                  Text("Price 0.0"),
+                  Text("Price  ₹${d.price.unitPrice}"),
                 ],
               ),
             ))
@@ -90,7 +89,7 @@ class CartPage extends StatelessWidget {
     cartItems.forEach((e) {
       sum += e.price.unitPrice;
     });
-    return "\$$sum";
+    return "₹$sum";
   }
 
   @override
@@ -152,7 +151,10 @@ class CartPage extends StatelessWidget {
                 height: 50,
                 color: Colors.white,
                 child: ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) => CheckOutPage()));
+                    },
                     child: Container(
                       alignment: Alignment.center,
                       height: 40,
