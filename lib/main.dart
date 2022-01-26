@@ -1,9 +1,5 @@
-import 'package:d2d_flutter/pages/HomePage.dart';
-import 'package:d2d_flutter/pages/LoginPage.dart';
-import 'package:d2d_flutter/pages/SplashPage.dart';
-import 'package:d2d_flutter/services/authServices.dart';
+import 'package:d2d_flutter/home.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 void main(){
   runApp(Main());
@@ -15,7 +11,7 @@ class Main extends StatelessWidget{
     // TODO: implement build
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: HomePage(),
+      home: Home(),
       //home: LoginPage(),
     );
   }

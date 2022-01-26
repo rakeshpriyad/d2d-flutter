@@ -28,7 +28,7 @@ class _HomePageState extends State<HomePage> {
     // TODO: implement build
     return Scaffold(
         appBar: AppBar(
-          title: Text("Home"),
+          title: Text(""),
           elevation: 0.0,
           actions: <Widget>[
             Padding(
