@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'package:d2d_flutter/models/CartItem.dart';
 import 'package:d2d_flutter/models/Item.dart';
+import 'package:d2d_flutter/models/Order.dart';
 import 'package:d2d_flutter/models/ShippingAddress.dart';
 import 'package:d2d_flutter/utils/api-const.dart';
 import 'package:d2d_flutter/utils/http_exception.dart';
@@ -114,7 +115,7 @@ class ApiService {
       final response = await HTTP.get(Uri.parse(url)).timeout(_TIMEOUT);
       if (response.statusCode == 200) {
         final parsed = jsonDecode(response.body) as List<dynamic>;
-        print(parsed);
+       // print(parsed);
         for (var i = 0; i < parsed.length; i++) {
           Map<String, dynamic> map = parsed[i];
           listAddress.add(ShippingAddress.fromJson(map));
@@ -126,7 +127,7 @@ class ApiService {
     return listAddress;
   }
 
-  Future createOrderCOD(String userName, String addressId) async {
+  Future<Order> createOrderCOD(String userName, String addressId) async {
     var url = '${ApiConst.COD_ORDER_BASE_URL}';
     var postData = jsonEncode(<String, String>{
       'id': "",
@@ -149,9 +150,11 @@ class ApiService {
     )
         .timeout(_TIMEOUT);
     final responseData = jsonDecode(response.body)
-    as List<dynamic>;
-    print(responseData);
+    as Map<String, dynamic>;
 
+    Order order = Order.fromJson(responseData);
+    print(responseData);
+    return order;
   }
 
 }

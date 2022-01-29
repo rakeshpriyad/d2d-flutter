@@ -1,4 +1,7 @@
 import 'package:d2d_flutter/controller/D2DController.dart';
+import 'package:d2d_flutter/models/Order.dart';
+import 'package:d2d_flutter/pages/OrderItemPage.dart';
+import 'package:d2d_flutter/pages/OrderPage.dart';
 import 'package:d2d_flutter/pages/OrderPlacePage.dart';
 import 'package:d2d_flutter/utils/CustomTextStyle.dart';
 import 'package:d2d_flutter/utils/api-const.dart';
@@ -13,7 +16,8 @@ class CashOnDeliveryPage extends StatefulWidget {
   }
 
   @override
-  _CashOnDeliveryPageState createState() => _CashOnDeliveryPageState(this.selectedAddressId);
+  _CashOnDeliveryPageState createState() =>
+      _CashOnDeliveryPageState(this.selectedAddressId);
 }
 
 class _CashOnDeliveryPageState extends State<CashOnDeliveryPage> {
@@ -54,8 +58,8 @@ class _CashOnDeliveryPageState extends State<CashOnDeliveryPage> {
                 child: Container(
                   child: ListView(
                     children: <Widget>[
-                    //  onlinePayment(),
-                    //  codPayment(),
+                      //  onlinePayment(),
+                      //  codPayment(),
                     ],
                   ),
                 ),
@@ -66,10 +70,12 @@ class _CashOnDeliveryPageState extends State<CashOnDeliveryPage> {
                   width: double.infinity,
                   margin: EdgeInsets.symmetric(vertical: 8, horizontal: 12),
                   child: RaisedButton(
-                    onPressed: () {
-                    controller.createOrderCOD("rakesh", this.selectedAddressId!);
+                    onPressed: () async {
+                      Order order = await controller.createOrderCOD(
+                          "rakesh", this.selectedAddressId!);
                       Navigator.of(context).push(new MaterialPageRoute(
-                          builder: (context) => OrderPlacePage()));
+                          //builder: (context) => OrderItemPage(order.orderItems)));
+                      builder: (context) => OrderPage(order)));
                     },
                     child: Text(
                       "Confirm Cash On Delivery",
@@ -91,7 +97,6 @@ class _CashOnDeliveryPageState extends State<CashOnDeliveryPage> {
     );
   }
 
-
   onlinePayment() {
     return Container(
       decoration: BoxDecoration(
@@ -110,7 +115,6 @@ class _CashOnDeliveryPageState extends State<CashOnDeliveryPage> {
               Navigator.of(context).push(new MaterialPageRoute(
                   builder: (context) => OrderPlacePage()));
             },
-
             activeColor: Colors.tealAccent.shade400,
           ),
           Column(
@@ -130,6 +134,4 @@ class _CashOnDeliveryPageState extends State<CashOnDeliveryPage> {
       ),
     );
   }
-
-
 }

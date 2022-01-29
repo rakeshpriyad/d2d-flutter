@@ -2,6 +2,7 @@ import 'package:d2d_flutter/models/CartItem.dart';
 import 'package:d2d_flutter/models/CartItemPrice.dart';
 import 'package:d2d_flutter/models/CartItemQuantity.dart';
 import 'package:d2d_flutter/models/Item.dart';
+import 'package:d2d_flutter/models/Order.dart';
 import 'package:d2d_flutter/models/ShippingAddress.dart';
 import 'package:d2d_flutter/services/cartItemService.dart';
 import 'package:d2d_flutter/services/itemService.dart';
@@ -117,9 +118,10 @@ class HomePageController extends GetxController {
     return result;
   }
 
-  createOrderCOD(String userName, String addressId) async {
-    orderService.createCODOrder(userName, addressId);
+  Future<Order> createOrderCOD(String userName, String addressId) async {
+    var result = await orderService.createCODOrder(userName, addressId);
     update();
+    return result;
   }
 
   removeFromCart(String id) async {
@@ -129,7 +131,7 @@ class HomePageController extends GetxController {
     update();
   }
 
-  selectAddress(String selectedAddressId) async{
+  selectAddress(String selectedAddressId) async {
     selectedAddressId = selectedAddressId;
     update();
   }
