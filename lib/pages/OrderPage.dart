@@ -12,21 +12,38 @@ import 'package:get/get.dart';
 
 class OrderPage extends StatefulWidget {
   Order? order;
+  Function? superSetState;
+  int selectedPosition = 0;
 
-  OrderPage(Order order) {
+  OrderPage(
+      {this.superSetState,
+      required this.selectedPosition,
+      required this.order});
+
+  /*OrderPage(Order order) {
     this.order = order;
-  }
+  }*/
 
   @override
-  _OrderPageState createState() => _OrderPageState(order);
+  _OrderPageState createState() => _OrderPageState(
+      superSetState: superSetState,
+      selectedPosition: selectedPosition,
+      order: order);
 }
 
 class _OrderPageState extends State<OrderPage> {
   Order? order;
+  Function? superSetState;
+  int selectedPosition = 0;
 
-  _OrderPageState(Order? order) {
+  _OrderPageState(
+      {Function? superSetState,
+      required this.selectedPosition,
+      required this.order});
+
+  /*_OrderPageState(Order? order) {
     this.order = order;
-  }
+  }*/
 
   @override
   void initState() {
@@ -44,8 +61,11 @@ class _OrderPageState extends State<OrderPage> {
               padding: EdgeInsets.symmetric(horizontal: 10),
               child: InkResponse(
                   onTap: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => CartPage()));
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) =>
+                                CartPage(superSetState, selectedPosition)));
                   },
                   child: Stack(
                     children: [
@@ -193,14 +213,21 @@ class OrderView extends StatelessWidget {
                     ),
                     RaisedButton(
                       onPressed: () {
-                        Navigator.push(context, new MaterialPageRoute(builder: (context) => OrderItemPage(order.orderItems)));
+                        Navigator.push(
+                            context,
+                            new MaterialPageRoute(
+                                builder: (context) =>
+                                    OrderItemPage(order.orderItems)));
                       },
                       color: Colors.green,
-                      padding: EdgeInsets.only(top: 12, left: 60, right: 60, bottom: 12),
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(24))),
+                      padding: EdgeInsets.only(
+                          top: 12, left: 60, right: 60, bottom: 12),
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(24))),
                       child: Text(
                         "Order Details",
-                        style: CustomTextStyle.textFormFieldSemiBold.copyWith(color: Colors.white),
+                        style: CustomTextStyle.textFormFieldSemiBold
+                            .copyWith(color: Colors.white),
                       ),
                     ),
                   ],

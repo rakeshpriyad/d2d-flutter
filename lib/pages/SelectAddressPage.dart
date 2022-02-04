@@ -1,22 +1,35 @@
 import 'package:d2d_flutter/controller/D2DController.dart';
 import 'package:d2d_flutter/models/ShippingAddress.dart';
-import 'package:d2d_flutter/pages/CheckOutPage.dart';
 import 'package:d2d_flutter/pages/PaymentOptionPage.dart';
 import 'package:d2d_flutter/utils/CustomTextStyle.dart';
-import 'package:d2d_flutter/utils/api-const.dart';
+import 'package:d2d_flutter/widgets/BottomNavigationBarWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class SelectAddressPage extends StatefulWidget {
+  SelectAddressPage({
+    this.superSetState,
+    required this.selectedPosition,
+  });
 
+  Function? superSetState;
+  int selectedPosition = 0;
 
   @override
-  _SelectAddressPageState createState() => _SelectAddressPageState();
+  _SelectAddressPageState createState() => _SelectAddressPageState(
+      superSetState: superSetState, selectedPosition: selectedPosition);
 }
 
 class _SelectAddressPageState extends State<SelectAddressPage> {
-  static final String BASE_URL = ApiConst.IMG_BASE_URL;
   GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey();
+
+  _SelectAddressPageState({
+    this.superSetState,
+    required this.selectedPosition,
+  });
+
+  Function? superSetState;
+  int selectedPosition = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +41,96 @@ class _SelectAddressPageState extends State<SelectAddressPage> {
         appBar: AppBar(
           backgroundColor: Colors.white,
           leading: IconButton(
-              icon: Icon(Icons.arrow_back,color: Colors.black,),
+              icon: Icon(
+                Icons.arrow_back,
+                color: Colors.black,
+              ),
+              onPressed: () {
+                Navigator.pop(context);
+              }),
+          title: Text(
+            "Back",
+            style: TextStyle(color: Colors.black, fontSize: 14),
+          ),
+        ),
+        body: getScaffold(controller),
+      ),
+    );
+  }
+
+  Widget getScaffold(controller) {
+    return Scaffold(
+        backgroundColor: Colors.grey.shade200,
+        bottomNavigationBar: BottomNavigationBarWidget(
+          superSetState,
+          selectedPosition,
+        ), //buildBottomNavigationBar(),
+        body:/* ListView(
+          shrinkWrap: true,
+          children: controller.addressList
+              .map<Widget>(
+                  (address) => generateShippingAddress(context, address))
+              .toList(),
+        ));*/
+    Column(
+          children: <Widget>[
+            Expanded(
+              child: Container(
+                child: ListView(
+                  shrinkWrap: true,
+                  children: controller.addressList
+                      .map<Widget>((address) =>
+                          generateShippingAddress(context, address))
+                      .toList(),
+                ),
+              ),
+              flex: 90,
+            ),
+            Expanded(
+              child: Container(
+                width: double.infinity,
+                margin: EdgeInsets.symmetric(vertical: 8, horizontal: 12),
+                child: RaisedButton(
+                  onPressed: () {
+                    controller.selectAddress(controller.addressList[0].id);
+                    Navigator.of(context).push(new MaterialPageRoute(
+                        builder: (context) => PaymentOptionPage(
+                              superSetState: this.superSetState,
+                              selectedPosition: this.selectedPosition,
+                              selectedAddressId: controller.addressList[0].id,
+                            )));
+                  },
+                  child: Text(
+                    "Deliver to this Address",
+                    style: CustomTextStyle.textFormFieldMedium.copyWith(
+                        color: Colors.white,
+                        fontSize: 14,
+                        fontWeight: FontWeight.bold),
+                  ),
+                  color: Colors.pink,
+                  textColor: Colors.white,
+                ),
+              ),
+              flex: 10,
+            )
+          ],
+        ));
+  }
+
+  @override
+  Widget build1(BuildContext context) {
+    final controller = Get.find<HomePageController>();
+    return MaterialApp(
+      home: Scaffold(
+        key: _scaffoldKey,
+        resizeToAvoidBottomInset: false,
+        appBar: AppBar(
+          backgroundColor: Colors.white,
+          leading: IconButton(
+              icon: Icon(
+                Icons.arrow_back,
+                color: Colors.black,
+              ),
               onPressed: () {
                 Navigator.pop(context);
               }),
@@ -42,11 +144,11 @@ class _SelectAddressPageState extends State<SelectAddressPage> {
             children: <Widget>[
               Expanded(
                 child: Container(
-                  child:
-                  ListView(
+                  child: ListView(
                     shrinkWrap: true,
                     children: controller.addressList
-                        .map((address) => generateShippingAddress(context, address))
+                        .map((address) =>
+                            generateShippingAddress(context, address))
                         .toList(),
                   ),
                 ),
@@ -60,12 +162,18 @@ class _SelectAddressPageState extends State<SelectAddressPage> {
                     onPressed: () {
                       controller.selectAddress(controller.addressList[0].id);
                       Navigator.of(context).push(new MaterialPageRoute(
-                          builder: (context) => PaymentOptionPage(controller.addressList[0].id)));
+                          builder: (context) => PaymentOptionPage(
+                                superSetState: this.superSetState,
+                                selectedPosition: this.selectedPosition,
+                                selectedAddressId: controller.addressList[0].id,
+                              )));
                     },
                     child: Text(
                       "Deliver to this Address",
-                      style: CustomTextStyle.textFormFieldMedium
-                          .copyWith(color: Colors.white, fontSize: 14, fontWeight: FontWeight.bold),
+                      style: CustomTextStyle.textFormFieldMedium.copyWith(
+                          color: Colors.white,
+                          fontSize: 14,
+                          fontWeight: FontWeight.bold),
                     ),
                     color: Colors.pink,
                     textColor: Colors.white,
@@ -80,12 +188,12 @@ class _SelectAddressPageState extends State<SelectAddressPage> {
     );
   }
 
-  Widget generateShippingAddress(BuildContext context, ShippingAddress address) {
+  Widget generateShippingAddress(
+      BuildContext context, ShippingAddress address) {
     return selectedAddressSection(address);
   }
 
-  selectedAddressSection(ShippingAddress address) {
-
+  Widget selectedAddressSection(ShippingAddress address) {
     return Container(
       margin: EdgeInsets.all(4),
       decoration: BoxDecoration(
@@ -93,10 +201,12 @@ class _SelectAddressPageState extends State<SelectAddressPage> {
       ),
       child: Card(
         elevation: 0,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(4))),
+        shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(Radius.circular(4))),
         child: Container(
           decoration: BoxDecoration(
-              borderRadius: BorderRadius.all(Radius.circular(4)), border: Border.all(color: Colors.grey.shade200)),
+              borderRadius: BorderRadius.all(Radius.circular(4)),
+              border: Border.all(color: Colors.grey.shade200)),
           padding: EdgeInsets.only(left: 12, top: 8, right: 12),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -109,18 +219,20 @@ class _SelectAddressPageState extends State<SelectAddressPage> {
                 children: <Widget>[
                   Text(
                     "${address.address1}",
-                    style: CustomTextStyle.textFormFieldSemiBold.copyWith(fontSize: 14),
+                    style: CustomTextStyle.textFormFieldSemiBold
+                        .copyWith(fontSize: 14),
                   ),
                   Container(
-                    padding: EdgeInsets.only(left: 8, right: 8, top: 4, bottom: 4),
+                    padding:
+                        EdgeInsets.only(left: 8, right: 8, top: 4, bottom: 4),
                     decoration: BoxDecoration(
                         shape: BoxShape.rectangle,
                         color: Colors.grey.shade300,
                         borderRadius: BorderRadius.all(Radius.circular(16))),
                     child: Text(
                       "HOME",
-                      style:
-                          CustomTextStyle.textFormFieldBlack.copyWith(color: Colors.indigoAccent.shade200, fontSize: 8),
+                      style: CustomTextStyle.textFormFieldBlack.copyWith(
+                          color: Colors.indigoAccent.shade200, fontSize: 8),
                     ),
                   )
                 ],
@@ -135,10 +247,12 @@ class _SelectAddressPageState extends State<SelectAddressPage> {
                 text: TextSpan(children: [
                   TextSpan(
                       text: "Mobile : ",
-                      style: CustomTextStyle.textFormFieldMedium.copyWith(fontSize: 12, color: Colors.grey.shade800)),
+                      style: CustomTextStyle.textFormFieldMedium
+                          .copyWith(fontSize: 12, color: Colors.grey.shade800)),
                   TextSpan(
                       text: "${address.mobileNo}",
-                      style: CustomTextStyle.textFormFieldBold.copyWith(color: Colors.black, fontSize: 12)),
+                      style: CustomTextStyle.textFormFieldBold
+                          .copyWith(color: Colors.black, fontSize: 12)),
                 ]),
               ),
               SizedBox(
@@ -162,7 +276,8 @@ class _SelectAddressPageState extends State<SelectAddressPage> {
       margin: EdgeInsets.only(top: topMargin),
       child: Text(
         strAddress,
-        style: CustomTextStyle.textFormFieldMedium.copyWith(fontSize: 12, color: Colors.grey.shade800),
+        style: CustomTextStyle.textFormFieldMedium
+            .copyWith(fontSize: 12, color: Colors.grey.shade800),
       ),
     );
   }
@@ -178,7 +293,8 @@ class _SelectAddressPageState extends State<SelectAddressPage> {
             onPressed: () {},
             child: Text(
               "Edit / Change",
-              style: CustomTextStyle.textFormFieldSemiBold.copyWith(fontSize: 12, color: Colors.indigo.shade700),
+              style: CustomTextStyle.textFormFieldSemiBold
+                  .copyWith(fontSize: 12, color: Colors.indigo.shade700),
             ),
             splashColor: Colors.transparent,
             highlightColor: Colors.transparent,
@@ -197,7 +313,8 @@ class _SelectAddressPageState extends State<SelectAddressPage> {
           FlatButton(
             onPressed: () {},
             child: Text("Add New Address",
-                style: CustomTextStyle.textFormFieldSemiBold.copyWith(fontSize: 12, color: Colors.indigo.shade700)),
+                style: CustomTextStyle.textFormFieldSemiBold
+                    .copyWith(fontSize: 12, color: Colors.indigo.shade700)),
             splashColor: Colors.transparent,
             highlightColor: Colors.transparent,
           ),

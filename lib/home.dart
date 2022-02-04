@@ -1,61 +1,48 @@
-import 'package:d2d_flutter/pages/1/ProfilePage1.dart';
-import 'package:d2d_flutter/pages/1/ProfilePage2.dart';
-import 'package:d2d_flutter/pages/1/SearchPage1.dart';
-import 'package:d2d_flutter/pages/CartPage.dart';
-import 'package:d2d_flutter/pages/HomePage.dart';
+import 'package:d2d_flutter/widgets/BottomNavigationBarWidget.dart';
+import 'package:d2d_flutter/widgets/ListBottomWidget.dart';
 import 'package:flutter/material.dart';
 
 class Home extends StatefulWidget {
+  int selectedPosition = 0;
+  Function? superSetState;
+  List<Widget>? listBottomWidget;
+
+  Home(List<Widget>? listBottomWidget, Function? superSetState,
+      int selectedPosition) {
+    this.superSetState = superSetState;
+    this.selectedPosition = selectedPosition;
+    this.listBottomWidget = listBottomWidget;
+  }
+
   @override
-  _HomeState createState() => _HomeState();
+  _HomeState createState() =>
+      _HomeState(listBottomWidget, superSetState, selectedPosition);
 }
 
 class _HomeState extends State<Home> {
   int selectedPosition = 0;
-  List<Widget> listBottomWidget = [];
+  Function? superSetState;
+  List<Widget>? listBottomWidget;
 
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    addHomePage();
+  _HomeState(List<Widget>? listBottomWidget, Function? superSetState,
+      int selectedPosition) {
+    this.superSetState = superSetState;
+    this.selectedPosition = selectedPosition;
+    this.listBottomWidget = listBottomWidget;
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey.shade100,
-      bottomNavigationBar: BottomNavigationBar(
-        items: [
-          BottomNavigationBarItem(icon: Icon(Icons.home), title: Text("Home")),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.search), title: Text("Search")),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.shopping_cart), title: Text("Cart")),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.person), title: Text("Account")),
-        ],
-        currentIndex: selectedPosition,
-        type: BottomNavigationBarType.fixed,
-        backgroundColor: Colors.grey.shade100,
-        selectedItemColor: Colors.blue,
-        unselectedItemColor: Colors.black,
-        onTap: (position) {
-          setState(() {
-            selectedPosition = position;
-          });
-        },
+      backgroundColor: Colors.grey.shade200,
+      bottomNavigationBar: BottomNavigationBarWidget(
+        superSetState,
+        selectedPosition,
       ),
-      body: Builder(builder: (context) {
-        return listBottomWidget[selectedPosition];
-      }),
+      body: ListBottomWidget(
+        listBottomWidget: this.listBottomWidget!,
+        selectedPosition: selectedPosition,
+      ),
     );
-  }
-
-  void addHomePage() {
-    listBottomWidget.add(HomePage());
-    listBottomWidget.add(SearchPage1());
-    listBottomWidget.add(CartPage());
-    listBottomWidget.add(ProfilePage2());
   }
 }

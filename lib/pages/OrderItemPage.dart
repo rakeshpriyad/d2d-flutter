@@ -1,8 +1,5 @@
 import 'package:d2d_flutter/controller/D2DController.dart';
-import 'package:d2d_flutter/models/CartItem.dart';
-import 'package:d2d_flutter/models/Order.dart';
 import 'package:d2d_flutter/models/OrderItem.dart';
-import 'package:d2d_flutter/pages/SelectAddressPage.dart';
 import 'package:d2d_flutter/utils/api-const.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -58,24 +55,6 @@ class OrderItemPage extends StatelessWidget {
                               fontWeight: FontWeight.w600, fontSize: 15.0),
                         ),
                       ),
-                      /*Container(
-                        alignment: Alignment.bottomRight,
-                        child: InkResponse(
-                          onTap: () {
-                            Get.find<HomePageController>().removeFromCart(orderItem.id!);
-                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                                content: Text(
-                                    "Item removed from cart successfully")));
-                          },
-                          child: Padding(
-                            padding: EdgeInsets.only(right: 10.0),
-                            child: Icon(
-                              Icons.remove_circle,
-                              color: Colors.red,
-                            ),
-                          ),
-                        ),
-                      )*/
                     ],
                   ),
                   SizedBox(
@@ -91,13 +70,6 @@ class OrderItemPage extends StatelessWidget {
     );
   }
 
-  /*getItemTotal(List<CartItem> cartItems) {
-    double sum = 0.0;
-    cartItems.forEach((e) {
-      sum += e.price.unitPrice;
-    });
-    return "₹$sum";
-  }*/
 
   @override
   Widget build(BuildContext context) {
@@ -129,53 +101,6 @@ class OrderItemPage extends StatelessWidget {
           ),
         ],
       ),
-      /*bottomNavigationBar: Container(
-        color: Colors.white,
-        child: SafeArea(
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Container(child: GetBuilder<HomePageController>(
-                builder: (_) {
-                  return RichText(
-                    text: TextSpan(
-                        text: "Total  ",
-                        style: TextStyle(color: Colors.black, fontSize: 18),
-                        children: <TextSpan>[
-                          TextSpan(
-                              text:
-                                  getItemTotal(controller.cartItems).toString(),
-                              style: TextStyle(fontWeight: FontWeight.bold))
-                        ]),
-                  );
-                },
-              )),
-              Container(
-                alignment: Alignment.centerLeft,
-                height: 50,
-                color: Colors.white,
-                child: ElevatedButton(
-                    onPressed: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => SelectAddressPage()));
-                    },
-                    child: Container(
-                      alignment: Alignment.center,
-                      height: 40,
-                      width: 100,
-                      child: Text(
-                        "Checkout",
-                        style: TextStyle(fontSize: 18),
-                      ),
-                    )),
-              )
-            ],
-          ),
-        ),
-      ),*/
     );
   }
 }

@@ -4,12 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'dart:async';
 
-class InviteFriendsPage1 extends StatefulWidget {
+class InviteFriendsPage extends StatefulWidget {
   @override
-  _InviteFriendsPageState1 createState() => _InviteFriendsPageState1();
+  _InviteFriendsPageState createState() => _InviteFriendsPageState();
 }
 
-class _InviteFriendsPageState1 extends State<InviteFriendsPage1> {
+class _InviteFriendsPageState extends State<InviteFriendsPage> {
   static const platform = MethodChannel('flutter.native/helper');
   String shareResponse = "Sharing";
 

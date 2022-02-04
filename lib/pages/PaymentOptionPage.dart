@@ -11,12 +11,27 @@ import 'package:money_formatter/money_formatter.dart';
 class PaymentOptionPage extends StatefulWidget {
   String? selectedAddressId;
 
+  PaymentOptionPage({
+    this.superSetState,
+    required this.selectedPosition,
+    required this.selectedAddressId,
+  });
+
+  Function? superSetState;
+  int selectedPosition = 0;
+
+/*
   PaymentOptionPage(String selectedAddrId) {
     this.selectedAddressId = selectedAddrId;
   }
+*/
 
   @override
-  _PaymentOptionPageState createState() => _PaymentOptionPageState(selectedAddressId);
+  _PaymentOptionPageState createState() => _PaymentOptionPageState(
+        superSetState: superSetState,
+        selectedPosition: selectedPosition,
+        selectedAddressId: selectedAddressId,
+      );
 }
 
 class _PaymentOptionPageState extends State<PaymentOptionPage> {
@@ -24,9 +39,19 @@ class _PaymentOptionPageState extends State<PaymentOptionPage> {
   GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey();
   String? selectedAddressId;
 
+  _PaymentOptionPageState({
+    this.superSetState,
+    required this.selectedPosition,
+    required this.selectedAddressId,
+  });
+
+  Function? superSetState;
+  int selectedPosition = 0;
+
+  /*
   _PaymentOptionPageState(String? selectedAddrId) {
     this.selectedAddressId = selectedAddrId;
-  }
+  }*/
 
   @override
   Widget build(BuildContext context) {
@@ -92,7 +117,11 @@ class _PaymentOptionPageState extends State<PaymentOptionPage> {
                   child: RaisedButton(
                     onPressed: () {
                       Navigator.of(context).push(new MaterialPageRoute(
-                          builder: (context) => CashOnDeliveryPage(this.selectedAddressId!)));
+                          builder: (context) => CashOnDeliveryPage(
+                                superSetState: this.superSetState,
+                                selectedPosition: this.selectedPosition,
+                                selectedAddressId: this.selectedAddressId!,
+                              )));
                     },
                     child: Text(
                       "Cash On Delivery",

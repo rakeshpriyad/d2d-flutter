@@ -1,17 +1,17 @@
+import 'package:d2d_flutter/BaseHome.dart';
 import 'package:d2d_flutter/home.dart';
 import 'package:flutter/material.dart';
 
-void main(){
-  runApp(Main());
+void main() {
+  runApp(D2DMain());
 }
 
-class Main extends StatelessWidget{
+class D2DMain extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: Home(),
+      home: BaseHome(),
       //home: LoginPage(),
     );
   }

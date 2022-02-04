@@ -2,12 +2,12 @@ import 'package:d2d_flutter/utils/CustomTextStyle.dart';
 import 'package:d2d_flutter/utils/CustomUtils.dart';
 import 'package:flutter/material.dart';
 
-class NotificationPage1 extends StatefulWidget {
+class NotificationPage extends StatefulWidget {
   @override
-  _NotificationPageState1 createState() => _NotificationPageState1();
+  _NotificationPageState createState() => _NotificationPageState();
 }
 
-class _NotificationPageState1 extends State<NotificationPage1> {
+class _NotificationPageState extends State<NotificationPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

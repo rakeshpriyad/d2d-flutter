@@ -1,5 +1,7 @@
 import 'package:d2d_flutter/controller/D2DController.dart';
+import 'package:d2d_flutter/models/CartItem.dart';
 import 'package:d2d_flutter/models/Item.dart';
+import 'package:d2d_flutter/pages/CartPage.dart';
 import 'package:d2d_flutter/utils/api-const.dart';
 import 'package:d2d_flutter/widgets/CustomButton.dart';
 import 'package:d2d_flutter/widgets/DotWidget.dart';
@@ -9,16 +11,22 @@ import 'package:get/get.dart';
 class ItemDetailPage extends StatefulWidget {
   final String itemId;
 
-  ItemDetailPage({required this.itemId});
+  Function? superSetState;
+  int selectedPosition =0;
+  ItemDetailPage({this.superSetState, required this.selectedPosition, required this.itemId});
 
   @override
-  _ItemDetailPageState createState() => _ItemDetailPageState();
+  _ItemDetailPageState createState() => _ItemDetailPageState(superSetState: superSetState, selectedPosition: this.selectedPosition);
 }
 
 class _ItemDetailPageState extends State<ItemDetailPage> {
   late PageController pageController;
   int active = 0;
   String BASE_URL = ApiConst.IMG_BASE_URL;
+  Function? superSetState;
+  int selectedPosition =0;
+  _ItemDetailPageState({this.superSetState, required this.selectedPosition});
+
 
   @override
   void initState() {
@@ -44,8 +52,34 @@ class _ItemDetailPageState extends State<ItemDetailPage> {
     HomePageController controller = Get.find<HomePageController>();
     Item model = controller.getItem(widget.itemId);
     return Scaffold(
-      appBar: AppBar(
+     /* appBar: AppBar(
         elevation: 0,
+      ),*/
+      appBar: AppBar(
+        title: Text(""),
+        elevation: 0.0,
+        actions: <Widget>[
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 10),
+            child: InkResponse(
+                onTap: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => CartPage(superSetState, selectedPosition)));
+                },
+                child: Stack(
+                  children: [
+                    GetBuilder<HomePageController>(builder: (_) => Align(
+                      child: Text(controller.cartItems.length > 0 ? getQuantity(controller.cartItems) : ''),
+                      alignment: Alignment.topLeft,
+                    )),
+                    Align(
+                      child: Icon(Icons.shopping_cart),
+                      alignment: Alignment.center,
+                    ),
+                  ],
+                )),
+          )
+        ],
       ),
       body: Container(
         decoration: BoxDecoration(
@@ -236,7 +270,7 @@ class _ItemDetailPageState extends State<ItemDetailPage> {
                       ? null
                       : () async {
                           try {
-                            var result = await controller.addToCart(model);
+                            controller.addToCart(model);
                             controller.getCartList();
                             ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                                 content:
@@ -250,5 +284,13 @@ class _ItemDetailPageState extends State<ItemDetailPage> {
             ],
           )),
     );
+  }
+
+  getQuantity(List<CartItem> cartItems) {
+    double sum = 0.0;
+    cartItems.forEach((e) {
+      sum += e.quantity.unitQuantity!;
+    });
+    return "₹$sum";
   }
 }

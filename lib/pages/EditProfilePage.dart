@@ -2,12 +2,12 @@ import 'package:d2d_flutter/utils/CustomColors.dart';
 import 'package:d2d_flutter/utils/CustomTextStyle.dart';
 import 'package:flutter/material.dart';
 
-class EditProfilePage1 extends StatefulWidget {
+class EditProfilePage extends StatefulWidget {
   @override
-  _EditProfilePageState1 createState() => _EditProfilePageState1();
+  _EditProfilePageState createState() => _EditProfilePageState();
 }
 
-class _EditProfilePageState1 extends State<EditProfilePage1> {
+class _EditProfilePageState extends State<EditProfilePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

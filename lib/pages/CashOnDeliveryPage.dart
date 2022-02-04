@@ -1,6 +1,5 @@
 import 'package:d2d_flutter/controller/D2DController.dart';
 import 'package:d2d_flutter/models/Order.dart';
-import 'package:d2d_flutter/pages/OrderItemPage.dart';
 import 'package:d2d_flutter/pages/OrderPage.dart';
 import 'package:d2d_flutter/pages/OrderPlacePage.dart';
 import 'package:d2d_flutter/utils/CustomTextStyle.dart';
@@ -10,24 +9,43 @@ import 'package:get/get.dart';
 
 class CashOnDeliveryPage extends StatefulWidget {
   String? selectedAddressId;
+  Function? superSetState;
+  int selectedPosition = 0;
 
-  CashOnDeliveryPage(String selectedAddrId) {
-    this.selectedAddressId = selectedAddrId;
-  }
+  CashOnDeliveryPage({
+    this.superSetState,
+    required this.selectedPosition,
+    this.selectedAddressId,
+  });
 
   @override
-  _CashOnDeliveryPageState createState() =>
-      _CashOnDeliveryPageState(this.selectedAddressId);
+  _CashOnDeliveryPageState createState() => _CashOnDeliveryPageState(
+        superSetState: superSetState,
+        selectedPosition: selectedPosition,
+        selectedAddressId: selectedAddressId,
+      );
 }
 
 class _CashOnDeliveryPageState extends State<CashOnDeliveryPage> {
   static final String BASE_URL = ApiConst.IMG_BASE_URL;
   GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey();
   String? selectedAddressId;
+  Function? superSetState;
+  int selectedPosition = 0;
 
-  _CashOnDeliveryPageState(String? selectedAddrId) {
-    this.selectedAddressId = selectedAddrId;
-  }
+/*
+  _CashOnDeliveryPageState({
+  this.superSetState,
+  required this.selectedPosition,
+  this.selectedAddressId,
+  });
+*/
+
+  _CashOnDeliveryPageState({
+    this.superSetState,
+    required this.selectedPosition,
+    this.selectedAddressId,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -75,7 +93,10 @@ class _CashOnDeliveryPageState extends State<CashOnDeliveryPage> {
                           "rakesh", this.selectedAddressId!);
                       Navigator.of(context).push(new MaterialPageRoute(
                           //builder: (context) => OrderItemPage(order.orderItems)));
-                      builder: (context) => OrderPage(order)));
+                          builder: (context) => OrderPage(
+                              superSetState: superSetState,
+                              selectedPosition: selectedPosition,
+                              order: order)));
                     },
                     child: Text(
                       "Confirm Cash On Delivery",

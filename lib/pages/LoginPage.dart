@@ -6,13 +6,27 @@ import 'package:provider/provider.dart';
 
 class LoginPage extends StatefulWidget {
   static const String routeName = "/login";
+  Function? superSetState;
+  int selectedPosition = 0;
+
+  LoginPage(Function? superSetState, int selectedPosition) {
+    this.superSetState = superSetState;
+    this.selectedPosition = selectedPosition;
+  }
 
   @override
-  _LoginScreenState createState() => _LoginScreenState();
+  _LoginScreenState createState() => _LoginScreenState(superSetState, selectedPosition);
 }
 
 class _LoginScreenState extends State<LoginPage> {
   final GlobalKey<FormState> _formKey = GlobalKey();
+  Function? superSetState;
+  int selectedPosition = 0;
+
+  _LoginScreenState(Function? superSetState, int selectedPosition) {
+    this.superSetState = superSetState;
+    this.selectedPosition = selectedPosition;
+  }
 
   Map<String, String> _authData = {'email': '', 'password': ''};
 
@@ -181,7 +195,7 @@ class _LoginScreenState extends State<LoginPage> {
                               child: InkWell(
                                 onTap: () {
                                   Navigator.of(context).push(MaterialPageRoute(
-                                      builder: (ctx) => SignUpPage()));
+                                      builder: (ctx) => SignUpPage(superSetState, selectedPosition)));
                                 },
                                 child: Container(
                                   padding: EdgeInsets.only(top: 90),

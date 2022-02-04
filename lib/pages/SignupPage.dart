@@ -7,31 +7,48 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class SignUpPage extends StatefulWidget {
+  Function? superSetState;
+  int selectedPosition = 0;
+
+  SignUpPage(Function? superSetState, int selectedPosition) {
+    this.superSetState = superSetState;
+    this.selectedPosition = selectedPosition;
+  }
+
   @override
-  _SignUpScreenState createState() => _SignUpScreenState();
+  _SignUpScreenState createState() =>
+      _SignUpScreenState(this.superSetState, this.selectedPosition);
 }
 
 class _SignUpScreenState extends State<SignUpPage> {
   final GlobalKey<FormState> _formKey = GlobalKey();
+  Function? superSetState;
+  int selectedPosition = 0;
+
+  _SignUpScreenState(Function? superSetState, int selectedPosition) {
+    this.superSetState = superSetState;
+    this.selectedPosition = selectedPosition;
+  }
 
   Map<String, String> _authData = {'email': '', 'password': ''};
   TextEditingController _passwordController = new TextEditingController();
 
   Future _submit() async {
-    var cState =_formKey.currentState;
-    if (cState!=null && cState.validate()) {
+    var cState = _formKey.currentState;
+    if (cState != null && cState.validate()) {
       //invalid
       return;
     }
     cState?.save();
     try {
-      String email = _authData!['email']!;
-      String password =_authData!['password']!;
+      String? email = _authData!['email'];
+      String? password = _authData!['password'];
       await Provider.of<Auth>(context, listen: false)
           .signUp(email, password)
           .then((_) {
-        Navigator.of(context)
-            .pushReplacement(MaterialPageRoute(builder: (ctx) => HomePage()));
+        Navigator.of(context).pushReplacement(MaterialPageRoute(
+            builder: (ctx) =>
+                HomePage(this.superSetState, this.selectedPosition)));
         Navigator.of(context).pop();
       });
     } on HttpException catch (e) {
@@ -51,7 +68,6 @@ class _SignUpScreenState extends State<SignUpPage> {
 
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
     return Scaffold(
       // backgroundColor: Colors.white,
       body: SingleChildScrollView(
@@ -118,8 +134,9 @@ class _SignUpScreenState extends State<SignUpPage> {
                                     color: Colors.white,
                                   )),
                               validator: (value) {
-                             if (value != null && (value.isEmpty || !value.contains('@'))) {
-                               // if (value.isEmpty || !value.contains('@')) {
+                                if (value != null &&
+                                    (value.isEmpty || !value.contains('@'))) {
+                                  // if (value.isEmpty || !value.contains('@')) {
                                   return 'Invalid email';
                                 }
                               },
@@ -153,7 +170,8 @@ class _SignUpScreenState extends State<SignUpPage> {
                                     color: Colors.white,
                                   )),
                               validator: (value) {
-                             if (value != null && (value.isEmpty || value.length < 5)) {
+                                if (value != null &&
+                                    (value.isEmpty || value.length < 5)) {
                                   return 'Password is to Short';
                                 }
                               },
@@ -213,7 +231,7 @@ class _SignUpScreenState extends State<SignUpPage> {
                               child: InkWell(
                                 onTap: () {
                                   Navigator.of(context).push(MaterialPageRoute(
-                                      builder: (ctx) => LoginPage()));
+                                      builder: (ctx) => LoginPage(superSetState, selectedPosition)));
                                 },
                                 child: Container(
                                   padding: EdgeInsets.only(top: 90),

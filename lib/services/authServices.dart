@@ -96,7 +96,7 @@ class Auth with ChangeNotifier {
   }
 
   Future<void> Authentication(
-      String email, String password, String endpoint) async {
+      String? email, String? password, String endpoint) async {
     try {
       //final url = '${MainUrl}';
       final response =  await http.post(
@@ -107,8 +107,8 @@ class Auth with ChangeNotifier {
 
         },
         body: jsonEncode(<String, String>{
-          'userName': email,
-          'password': password,
+          'userName': email!,
+          'password': password!,
         }),
       ).timeout(_TIMEOUT);
 /*
@@ -152,7 +152,7 @@ class Auth with ChangeNotifier {
     return Authentication(email, password, 'signInWithPassword');
   }
 
-  Future<void> signUp(String email, String password) {
+  Future<void> signUp(String? email, String? password) {
     return Authentication(email, password, 'signUp');
   }
 }

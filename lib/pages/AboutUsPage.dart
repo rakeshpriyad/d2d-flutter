@@ -1,12 +1,12 @@
 import 'package:d2d_flutter/utils/CustomTextStyle.dart';
 import 'package:flutter/material.dart';
 
-class AboutPage1 extends StatefulWidget {
+class AboutPage extends StatefulWidget {
   @override
-  _AboutPageState1 createState() => _AboutPageState1();
+  _AboutPageState createState() => _AboutPageState();
 }
 
-class _AboutPageState1 extends State<AboutPage1> {
+class _AboutPageState extends State<AboutPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

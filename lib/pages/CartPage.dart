@@ -7,6 +7,13 @@ import 'package:get/get.dart';
 
 class CartPage extends StatelessWidget {
   static final String BASE_URL = ApiConst.IMG_BASE_URL;
+  Function? superSetState;
+  int selectedPosition = 0;
+
+  CartPage(Function? superSetState, int selectedPosition) {
+    this.superSetState = superSetState;
+    this.selectedPosition = selectedPosition;
+  }
 
   Widget generateCart(BuildContext context, CartItem d) {
     return Padding(
@@ -55,7 +62,8 @@ class CartPage extends StatelessWidget {
                         alignment: Alignment.bottomRight,
                         child: InkResponse(
                           onTap: () {
-                            Get.find<HomePageController>().removeFromCart(d.id!);
+                            Get.find<HomePageController>()
+                                .removeFromCart(d.id!);
                             ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                                 content: Text(
                                     "Item removed from cart successfully")));
@@ -151,8 +159,13 @@ class CartPage extends StatelessWidget {
                 color: Colors.white,
                 child: ElevatedButton(
                     onPressed: () {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => SelectAddressPage()));
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => SelectAddressPage(
+                                    superSetState: this.superSetState,
+                                    selectedPosition: this.selectedPosition,
+                                  )));
                     },
                     child: Container(
                       alignment: Alignment.center,
@@ -163,7 +176,8 @@ class CartPage extends StatelessWidget {
                         style: TextStyle(fontSize: 18),
                       ),
                     )),
-              )
+              ),
+              //BottomNavigationBarWidget(superSetState, selectedPosition),
             ],
           ),
         ),

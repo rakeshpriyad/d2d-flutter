@@ -1,18 +1,18 @@
 import 'package:d2d_flutter/pages/1/list_profile_section.dart';
+import 'package:d2d_flutter/pages/AboutUsPage.dart';
+import 'package:d2d_flutter/pages/EditProfilePage.dart';
+import 'package:d2d_flutter/pages/InviteFriendsPage.dart';
+import 'package:d2d_flutter/pages/NotificationPage.dart';
 import 'package:d2d_flutter/utils/CustomTextStyle.dart';
 import 'package:flutter/material.dart';
 
-import 'AboutUsPage1.dart';
-import 'EditProfilePage1.dart';
-import 'InviteFriendsPage1.dart';
-import 'NotificationPage1.dart';
 
-class ProfilePage2 extends StatefulWidget {
+class ProfilePage extends StatefulWidget {
   @override
-  _ProfilePage2State createState() => _ProfilePage2State();
+  _ProfilePageState createState() => _ProfilePageState();
 }
 
-class _ProfilePage2State extends State<ProfilePage2> {
+class _ProfilePageState extends State<ProfilePage> {
   List<ListProfileSection> listSection = [];
 
   @override
@@ -24,16 +24,16 @@ class _ProfilePage2State extends State<ProfilePage2> {
 
   void createListItem() {
     listSection.add(createSection("Notifications", "assets/images/ic_notification.png",
-        Colors.blue.shade800, NotificationPage1()));
+        Colors.blue.shade800, NotificationPage()));
     listSection.add(createSection(
         "Payment Method", "assets/images/ic_payment.png", Colors.teal.shade800, null));
     listSection.add(createSection(
         "Invite Friends",
         "assets/images/ic_invite_friends.png",
         Colors.indigo.shade800,
-        InviteFriendsPage1()));
+        InviteFriendsPage()));
     listSection.add(createSection("About Us", "assets/images/ic_about_us.png",
-        Colors.black.withOpacity(0.8), AboutPage1()));
+        Colors.black.withOpacity(0.8), AboutPage()));
     listSection.add(createSection(
         "Logout", "assets/images/ic_logout.png", Colors.red.withOpacity(0.7), null));
   }
@@ -149,7 +149,7 @@ class _ProfilePage2State extends State<ProfilePage2> {
                                                 context,
                                                 new MaterialPageRoute(
                                                     builder: (context) =>
-                                                        EditProfilePage1()));
+                                                        EditProfilePage()));
                                           },
                                         )
                                       ],
