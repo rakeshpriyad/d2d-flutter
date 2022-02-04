@@ -33,13 +33,6 @@ class _CashOnDeliveryPageState extends State<CashOnDeliveryPage> {
   Function? superSetState;
   int selectedPosition = 0;
 
-/*
-  _CashOnDeliveryPageState({
-  this.superSetState,
-  required this.selectedPosition,
-  this.selectedAddressId,
-  });
-*/
 
   _CashOnDeliveryPageState({
     this.superSetState,

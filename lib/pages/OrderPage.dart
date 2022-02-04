@@ -15,20 +15,18 @@ class OrderPage extends StatefulWidget {
   Function? superSetState;
   int selectedPosition = 0;
 
-  OrderPage(
-      {this.superSetState,
-      required this.selectedPosition,
-      required this.order});
-
-  /*OrderPage(Order order) {
-    this.order = order;
-  }*/
+  OrderPage({
+    this.superSetState,
+    required this.selectedPosition,
+    required this.order,
+  });
 
   @override
   _OrderPageState createState() => _OrderPageState(
-      superSetState: superSetState,
-      selectedPosition: selectedPosition,
-      order: order);
+        superSetState: superSetState,
+        selectedPosition: selectedPosition,
+        order: order,
+      );
 }
 
 class _OrderPageState extends State<OrderPage> {
@@ -40,15 +38,6 @@ class _OrderPageState extends State<OrderPage> {
       {Function? superSetState,
       required this.selectedPosition,
       required this.order});
-
-  /*_OrderPageState(Order? order) {
-    this.order = order;
-  }*/
-
-  @override
-  void initState() {
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
