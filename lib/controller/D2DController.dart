@@ -1,10 +1,12 @@
 import 'package:d2d_flutter/models/CartItem.dart';
 import 'package:d2d_flutter/models/CartItemPrice.dart';
 import 'package:d2d_flutter/models/CartItemQuantity.dart';
+import 'package:d2d_flutter/models/Invoice.dart';
 import 'package:d2d_flutter/models/Item.dart';
 import 'package:d2d_flutter/models/Order.dart';
 import 'package:d2d_flutter/models/ShippingAddress.dart';
 import 'package:d2d_flutter/services/cartItemService.dart';
+import 'package:d2d_flutter/services/invoiceService.dart';
 import 'package:d2d_flutter/services/itemService.dart';
 import 'package:d2d_flutter/services/orderService.dart';
 import 'package:d2d_flutter/services/shippingAddressService.dart';
@@ -15,9 +17,11 @@ class HomePageController extends GetxController {
   CartItemService cartItemServices = CartItemService();
   OrderService orderService = OrderService();
   ShippingAddressServices addressServices = ShippingAddressServices();
+  InvoiceService invoiceService = InvoiceService();
   List<Item> items = [];
   List<CartItem> cartItems = [];
   List<ShippingAddress> addressList = [];
+  late Invoice invoice;
   bool isLoading = true;
   String selectedAddressId = "";
 
@@ -52,6 +56,16 @@ class HomePageController extends GetxController {
   getShippingAddressList() async {
     try {
       addressList = await addressServices.loadAddresses();
+      update();
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  getInvoice(String orderId) async {
+    try {
+      update();
+      return await invoiceService.loadInvoice(orderId);
       update();
     } catch (e) {
       print(e);

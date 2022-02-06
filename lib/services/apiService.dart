@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 import 'package:d2d_flutter/models/CartItem.dart';
+import 'package:d2d_flutter/models/Invoice.dart';
 import 'package:d2d_flutter/models/Item.dart';
 import 'package:d2d_flutter/models/Order.dart';
 import 'package:d2d_flutter/models/ShippingAddress.dart';
@@ -115,7 +116,7 @@ class ApiService {
       final response = await HTTP.get(Uri.parse(url)).timeout(_TIMEOUT);
       if (response.statusCode == 200) {
         final parsed = jsonDecode(response.body) as List<dynamic>;
-       // print(parsed);
+        // print(parsed);
         for (var i = 0; i < parsed.length; i++) {
           Map<String, dynamic> map = parsed[i];
           listAddress.add(ShippingAddress.fromJson(map));
@@ -141,20 +142,36 @@ class ApiService {
 
     final response = await HTTP
         .post(
-      Uri.parse(url),
-      headers: <String, String>{
-        'Content-Type': 'application/json; charset=UTF-8',
-        "Access-Control-Allow-Origin": "*",
-      },
-      body: postData,
-    )
+          Uri.parse(url),
+          headers: <String, String>{
+            'Content-Type': 'application/json; charset=UTF-8',
+            "Access-Control-Allow-Origin": "*",
+          },
+          body: postData,
+        )
         .timeout(_TIMEOUT);
-    final responseData = jsonDecode(response.body)
-    as Map<String, dynamic>;
+    final responseData = jsonDecode(response.body) as Map<String, dynamic>;
 
     Order order = Order.fromJson(responseData);
     print(responseData);
     return order;
   }
 
+  Future<Invoice> loadInvoice(String orderId) async {
+    var baseUrl = ApiConst.INVOICE_BASE_URL;
+    Invoice? invoice = null;
+    var url = '${baseUrl}/${orderId}';
+    try {
+      final response = await HTTP.get(Uri.parse(url)).timeout(_TIMEOUT);
+      if (response.statusCode == 200) {
+        final parsed = jsonDecode(response.body) as Map<String, dynamic>;
+        print(parsed);
+
+        invoice = Invoice.fromJson(parsed);
+      }
+    } catch (e) {
+      throw e;
+    }
+    return invoice!;
+  }
 }

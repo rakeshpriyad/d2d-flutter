@@ -1,10 +1,8 @@
 import 'package:d2d_flutter/controller/D2DController.dart';
-import 'package:d2d_flutter/models/Item.dart';
 import 'package:d2d_flutter/models/Order.dart';
 import 'package:d2d_flutter/pages/CartPage.dart';
-import 'package:d2d_flutter/pages/ItemDetailPage.dart';
+import 'package:d2d_flutter/pages/DownloadInvoicePage.dart';
 import 'package:d2d_flutter/pages/OrderItemPage.dart';
-import 'package:d2d_flutter/services/itemService.dart';
 import 'package:d2d_flutter/utils/CustomTextStyle.dart';
 import 'package:d2d_flutter/utils/api-const.dart';
 import 'package:flutter/material.dart';
@@ -219,6 +217,7 @@ class OrderView extends StatelessWidget {
                             .copyWith(color: Colors.white),
                       ),
                     ),
+                    DownloadInvoicePage(orderId: order.id!),
                   ],
                 )),
           )),

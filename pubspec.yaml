@@ -39,6 +39,14 @@ dependencies:
   money_formatter: ^0.0.3
   flutter_rating_bar: ^1.1.0
   flutter_svg: ^1.0.3
+  # create pdf document
+  pdf: ^3.1.0
+  # save file
+  path_provider: ^2.0.1
+  # open pdf document
+  open_file: ^3.1.0
+  # format dates for invoice
+  intl: ^0.17.0
 
 
   # The following adds the Cupertino Icons font to your application.
