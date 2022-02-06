@@ -1,0 +1,168 @@
+import 'package:d2d_flutter/utils/CustomColors.dart';
+import 'package:d2d_flutter/utils/CustomTextStyle.dart';
+import 'package:flutter/material.dart';
+
+class EditAddressPage extends StatefulWidget {
+  @override
+  _EditAddressPageState createState() => _EditAddressPageState();
+}
+
+class _EditAddressPageState extends State<EditAddressPage> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.white,
+        leading: IconButton(
+            icon: Icon(
+              Icons.arrow_back,
+              color: Colors.black,
+            ),
+            onPressed: () {
+              Navigator.pop(context);
+            }),
+        title: Text(
+          "New Address",
+          style: CustomTextStyle.textFormFieldBlack.copyWith(
+              color: Colors.black, fontSize: 18, fontWeight: FontWeight.bold),
+        ),
+      ),
+      body: Container(
+        child: Column(
+          children: <Widget>[
+            Container(
+              child: TextFormField(
+                keyboardType: TextInputType.text,
+                decoration: InputDecoration(
+                  contentPadding: EdgeInsets.all(12),
+                  border: border,
+                  hintText: "Mobile Number",
+                  focusedBorder: border.copyWith(
+                      borderSide: BorderSide(color: Colors.blue)),
+                ),
+              ),
+              margin: EdgeInsets.only(left: 12, right: 12, top: 24),
+            ),
+            Container(
+              child: TextFormField(
+                keyboardType: TextInputType.emailAddress,
+                decoration: InputDecoration(
+                    contentPadding: EdgeInsets.all(12),
+                    border: border,
+                    hintText: "Address1",
+                    focusedBorder: border.copyWith(
+                        borderSide: BorderSide(color: Colors.blue))),
+              ),
+              margin: EdgeInsets.only(left: 12, right: 12, top: 12),
+            ),
+            Container(
+              child: TextFormField(
+                keyboardType: TextInputType.emailAddress,
+                decoration: InputDecoration(
+                    contentPadding: EdgeInsets.all(12),
+                    border: border,
+                    hintText: "Address2",
+                    focusedBorder: border.copyWith(
+                        borderSide: BorderSide(color: Colors.blue))),
+              ),
+              margin: EdgeInsets.only(left: 12, right: 12, top: 12),
+            ),
+            Container(
+              child: TextFormField(
+                keyboardType: TextInputType.emailAddress,
+                decoration: InputDecoration(
+                    contentPadding: EdgeInsets.all(12),
+                    border: border,
+                    hintText: "Address3",
+                    focusedBorder: border.copyWith(
+                        borderSide: BorderSide(color: Colors.blue))),
+              ),
+              margin: EdgeInsets.only(left: 12, right: 12, top: 12),
+            ),
+            Container(
+              child: TextFormField(
+                keyboardType: TextInputType.phone,
+                decoration: InputDecoration(
+                    contentPadding: EdgeInsets.all(12),
+                    border: border,
+                    hintText: "Country",
+                    focusedBorder: border.copyWith(
+                        borderSide: BorderSide(color: Colors.blue))),
+              ),
+              margin: EdgeInsets.only(left: 12, right: 12, top: 12),
+            ),
+            Container(
+              child: TextFormField(
+                keyboardType: TextInputType.phone,
+                decoration: InputDecoration(
+                    contentPadding: EdgeInsets.all(12),
+                    border: border,
+                    hintText: "State",
+                    focusedBorder: border.copyWith(
+                        borderSide: BorderSide(color: Colors.blue))),
+              ),
+              margin: EdgeInsets.only(left: 12, right: 12, top: 12),
+            ),
+            Container(
+              child: TextFormField(
+                keyboardType: TextInputType.phone,
+                decoration: InputDecoration(
+                    contentPadding: EdgeInsets.all(12),
+                    border: border,
+                    hintText: "City",
+                    focusedBorder: border.copyWith(
+                        borderSide: BorderSide(color: Colors.blue))),
+              ),
+              margin: EdgeInsets.only(left: 12, right: 12, top: 12),
+            ),
+            /*Container(
+              child: TextFormField(
+                keyboardType: TextInputType.phone,
+                decoration: InputDecoration(
+                    contentPadding: EdgeInsets.all(12),
+                    border: border,
+                    hintText: "Land Mark",
+                    focusedBorder: border.copyWith(
+                        borderSide: BorderSide(color: Colors.blue))),
+              ),
+              margin: EdgeInsets.only(left: 12, right: 12, top: 12),
+            ),*/
+            Container(
+              child: TextFormField(
+                keyboardType: TextInputType.phone,
+                decoration: InputDecoration(
+                    contentPadding: EdgeInsets.all(12),
+                    border: border,
+                    hintText: "Pin Code",
+                    focusedBorder: border.copyWith(
+                        borderSide: BorderSide(color: Colors.blue))),
+              ),
+              margin: EdgeInsets.only(left: 12, right: 12, top: 12),
+            ),
+            SizedBox(
+              height: 24,
+            ),
+            Container(
+              width: double.infinity,
+              margin: EdgeInsets.only(left: 48, right: 48),
+              child: RaisedButton(
+                color: Colors.blue,
+                textColor: Colors.white,
+                onPressed: () {},
+                child: Text(
+                  "Save",
+                  style: CustomTextStyle.textFormFieldBlack
+                      .copyWith(color: Colors.white, fontSize: 16),
+                ),
+              ),
+            )
+          ],
+        ),
+      ),
+    );
+  }
+
+  var border = OutlineInputBorder(
+      borderRadius: BorderRadius.all(Radius.circular(4)),
+      borderSide: BorderSide(width: 1, color: Colors.grey));
+}

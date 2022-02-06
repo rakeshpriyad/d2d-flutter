@@ -5,14 +5,14 @@ import 'package:d2d_flutter/models/supplier.dart';
 
 class Invoice {
   final String id;
-  final InvoiceInfo info;
+  final String description ="Invoice Details";
+  //final InvoiceInfo info;
   final Supplier supplier;
   final Customer customer;
   final List<InvoiceLineItem> items;
 
   const Invoice({
     required this.id,
-    required this.info,
     required this.supplier,
     required this.customer,
     required this.items,
@@ -34,12 +34,12 @@ class Invoice {
 
     return Invoice(
       id: json['id'],
-      info: InvoiceInfo(
+      /*info: InvoiceInfo(
         date: date,
         dueDate: dueDate,
         description: 'My description...',
         number: '${DateTime.now().year}-9999',
-      ),
+      ),*/
       supplier: Supplier(
         name: 'Shiv Jyoti',
         address: 'Mangal Hat chauk',

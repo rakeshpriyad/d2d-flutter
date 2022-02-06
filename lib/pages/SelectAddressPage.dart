@@ -1,5 +1,8 @@
 import 'package:d2d_flutter/controller/D2DController.dart';
 import 'package:d2d_flutter/models/ShippingAddress.dart';
+import 'package:d2d_flutter/pages/EditAddressPage.dart';
+import 'package:d2d_flutter/pages/NewAddressPage.dart';
+import 'package:d2d_flutter/pages/OrderPlacePage.dart';
 import 'package:d2d_flutter/pages/PaymentOptionPage.dart';
 import 'package:d2d_flutter/utils/CustomTextStyle.dart';
 import 'package:d2d_flutter/widgets/BottomNavigationBarWidget.dart';
@@ -290,7 +293,10 @@ class _SelectAddressPageState extends State<SelectAddressPage> {
             flex: 2,
           ),
           FlatButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.of(context).push(new MaterialPageRoute(
+                  builder: (context) => EditAddressPage()));
+            },
             child: Text(
               "Edit / Change",
               style: CustomTextStyle.textFormFieldSemiBold
@@ -311,7 +317,10 @@ class _SelectAddressPageState extends State<SelectAddressPage> {
             flex: 3,
           ),
           FlatButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.of(context).push(new MaterialPageRoute(
+                  builder: (context) => NewAddressPage()));
+            },
             child: Text("Add New Address",
                 style: CustomTextStyle.textFormFieldSemiBold
                     .copyWith(fontSize: 12, color: Colors.indigo.shade700)),

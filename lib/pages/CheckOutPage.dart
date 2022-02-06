@@ -223,7 +223,7 @@ class _CheckOutPageState extends State<CheckOutPage> {
                 height: 1,
                 width: double.infinity,
               ),
-              addressAction()
+     //         addressAction()
             ],
           ),
         ),
@@ -242,7 +242,7 @@ class _CheckOutPageState extends State<CheckOutPage> {
     );
   }
 
-  addressAction() {
+  /*addressAction() {
     return Container(
       child: Row(
         children: <Widget>[
@@ -284,7 +284,7 @@ class _CheckOutPageState extends State<CheckOutPage> {
         ],
       ),
     );
-  }
+  }*/
 
   standardDelivery() {
     return Container(
